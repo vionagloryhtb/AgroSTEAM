@@ -1,0 +1,8 @@
+{
+  "name": "AgroSTEM / PanganLokal Lab",
+  "description": "Platform edukasi STEM interaktif untuk siswa mengenai pengolahan bahan pangan lokal (Ikan, Singkong, dan Kelapa Sawit) menjadi produk bernilai tinggi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

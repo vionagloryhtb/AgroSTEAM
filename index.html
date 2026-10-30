@@ -1,0 +1,2049 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroSTEM - Edukasi Inovasi Pangan Lokal</title>
+  <meta name="description" content="Platform edukasi STEM interaktif mengenai pengolahan bahan pangan lokal (Ikan, Singkong, dan Kelapa Sawit) menjadi produk bernilai tinggi." />
+  <meta property="og:title" content="AgroSTEM - Edukasi Inovasi Pangan Lokal" />
+  <meta property="og:description" content="Platform edukasi STEM interaktif mengenai pengolahan bahan pangan lokal menjadi produk bernilai tinggi." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              emerald: '#059669',
+              teal: '#0d9488',
+              indigo: '#4f46e5',
+              dark: '#0f172a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Styling cetak khusus LKPD */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #print-area, #print-area * {
+        visibility: visible;
+      }
+      #print-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: white;
+        color: black;
+        padding: 20px;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-emerald-100 selection:text-emerald-900 min-h-screen flex flex-col">
+
+  <!-- NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo Brand -->
+      <a href="#beranda" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-emerald-600 via-teal-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-transform">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+          </svg>
+        </div>
+        <div>
+          <span class="text-xl font-extrabold tracking-tight text-slate-900 group-hover:text-emerald-700 transition-colors">AgroSTEM</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+        <a href="#beranda" class="px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-emerald-600 hover:bg-emerald-50/70 rounded-lg transition-colors">Beranda</a>
+        <a href="#eksplorasi" class="px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-emerald-600 hover:bg-emerald-50/70 rounded-lg transition-colors">Eksplorasi Pangan</a>
+        <a href="#workflow" class="px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-emerald-600 hover:bg-emerald-50/70 rounded-lg transition-colors">Alur Produksi</a>
+        <a href="#kalkulator" class="px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-indigo-600 hover:bg-indigo-50/70 rounded-lg transition-colors">Kalkulator STEM</a>
+        <a href="#lab-mandiri" class="px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-emerald-600 hover:bg-emerald-50/70 rounded-lg transition-colors">Lab Eksperimen</a>
+      </nav>
+
+      <!-- CTA Button Desktop -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="#kalkulator" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-sm font-bold shadow-sm shadow-emerald-700/20 hover:shadow-md transition-all transform active:scale-95">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+          <span>Hitung Rendemen</span>
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-btn" type="button" aria-label="Buka Menu" class="md:hidden p-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none">
+        <svg id="hamburger-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-6 space-y-2 shadow-lg">
+      <a href="#beranda" class="mobile-nav-link block px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600">Beranda</a>
+      <a href="#eksplorasi" class="mobile-nav-link block px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600">Eksplorasi Pangan</a>
+      <a href="#workflow" class="mobile-nav-link block px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600">Alur Produksi</a>
+      <a href="#kalkulator" class="mobile-nav-link block px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">Kalkulator STEM</a>
+      <a href="#lab-mandiri" class="mobile-nav-link block px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600">Lab Eksperimen</a>
+      <div class="pt-2">
+        <a href="#kalkulator" class="mobile-nav-link flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-emerald-600 text-white font-bold text-sm shadow-md">
+          Mulai Simulasi Matematika &amp; HPP
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-grow">
+
+    <!-- HERO SECTION -->
+    <section id="beranda" class="relative overflow-hidden pt-12 pb-20 bg-gradient-to-b from-slate-50 via-emerald-50/30 to-slate-50 border-b border-slate-200/60">
+      <!-- Background Ambient Glow -->
+      <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-tr from-emerald-300/20 via-teal-200/20 to-indigo-300/20 blur-3xl pointer-events-none -z-10"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto">
+          
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Pengolahan Pangan Lokal <span class="bg-gradient-to-r from-emerald-600 via-teal-600 to-indigo-600 bg-clip-text text-transparent">Berbasis STEM</span>
+          </h1>
+
+          <p class="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+            Pelajari integrasi Sains, Teknologi, Rekayasa, dan Matematika dalam mengolah komoditas 
+            <span class="text-slate-900 font-semibold">Ikan</span>, 
+            <span class="text-slate-900 font-semibold">Singkong</span>, dan 
+            <span class="text-slate-900 font-semibold">Kelapa Sawit</span> menjadi produk bernilai tambah tinggi.
+          </p>
+
+          <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="#eksplorasi" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base shadow-lg shadow-emerald-600/25 transition-all flex items-center justify-center gap-2 group">
+              <span>Mulai Eksplorasi</span>
+              <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+            <a href="#kalkulator" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 font-bold text-base shadow-sm transition-all flex items-center justify-center gap-2">
+              <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+              <span>Kalkulator STEM</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- 4 PILAR STEM OVERVIEW CARDS -->
+        <div class="mt-14">
+          <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold text-slate-900 tracking-tight">4 Pilar STEM dalam Pengolahan Pangan</h2>
+            <p class="text-sm text-slate-500 mt-1">Prinsip dasar untuk menghasilkan produk pangan berkualitas, higienis, dan bernilai ekonomis.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Science Card -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+              <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 mb-2">Science (Sains)</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Memahami biokimia pangan: denaturasi protein, osmosis, aktivitas mikroba pembusuk, fermentasi asam laktat, dan reaksi hidrolisis lemak.
+              </p>
+            </div>
+
+            <!-- Technology Card -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+              <div class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 mb-2">Technology (Teknologi)</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Pemanfaatan mesin modern: vacuum sealer, deboning mekanis, Solar Dryer Dome, ekstraktor sentrifugal, dan sensor suhu digital.
+              </p>
+            </div>
+
+            <!-- Engineering Card -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+              <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 mb-2">Engineering (Rekayasa)</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Desain alur kerja pabrik mini, logistik rantai dingin (cold chain), sistem zero-waste pemanfaatan limbah, serta keselamatan kerja (K3).
+              </p>
+            </div>
+
+            <!-- Mathematics Card -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+              <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 mb-2">Mathematics (Matematika)</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Kuantifikasi presisi: rasio rendemen (% yield), kadar air, stoikiometri reaksi saponifikasi, neraca massa, HPP, dan proyeksi laba.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: MODUL INTERAKTIF 3 BAHAN PANGAN -->
+    <section id="eksplorasi" class="py-20 bg-white border-b border-slate-200/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+            Eksplorasi Bahan Pangan
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-2">
+            Pilih komoditas untuk mempelajari integrasi Sains, Teknologi, Rekayasa, dan Matematika.
+          </p>
+        </div>
+
+        <!-- COMMODITY TABS NAVIGATION -->
+        <div class="flex justify-center mb-8">
+          <div class="inline-flex p-1.5 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner max-w-full overflow-x-auto">
+            <button id="tab-btn-ikan" onclick="switchCommodity('ikan')" class="tab-button flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm transition-all text-white bg-emerald-600 shadow-sm">
+              <span class="text-base">🐟</span>
+              <span>Ikan</span>
+            </button>
+            <button id="tab-btn-singkong" onclick="switchCommodity('singkong')" class="tab-button flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm transition-all text-slate-600 hover:text-slate-900">
+              <span class="text-base">🥔</span>
+              <span>Singkong</span>
+            </button>
+            <button id="tab-btn-sawit" onclick="switchCommodity('sawit')" class="tab-button flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm transition-all text-slate-600 hover:text-slate-900">
+              <span class="text-base">🌴</span>
+              <span>Kelapa Sawit</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- COMMODITY CONTENT CONTAINER -->
+        <div id="commodity-display">
+          
+          <!-- BANNER INFO KOMODITAS (DYNAMIC) -->
+          <div id="commodity-hero-card" class="bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 text-white rounded-3xl p-6 sm:p-8 mb-8 shadow-lg relative overflow-hidden">
+            <div class="relative z-10 max-w-3xl">
+              <h3 id="comm-title" class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                Komoditas Ikan
+              </h3>
+              <p id="comm-desc" class="text-slate-200 text-sm sm:text-base mt-3 leading-relaxed">
+                Ikan merupakan sumber protein hewani berkualitas tinggi dengan asam lemak omega-3. Namun, sifatnya mudah rusak (perishable) menuntut penerapan sains pengawetan, rantai dingin, dan ekstraksi kolagen dari limbah sisik/kulit ikan.
+              </p>
+              
+              <!-- Tag Produk Turunan -->
+              <div class="mt-5 flex flex-wrap items-center gap-2">
+                <span class="text-xs font-semibold text-slate-300 mr-1">Produk Unggulan:</span>
+                <span id="comm-tag1" class="px-3 py-1 bg-emerald-500/30 border border-emerald-400/40 rounded-full text-xs font-semibold text-emerald-100">Fillet Ikan Higienis</span>
+                <span id="comm-tag2" class="px-3 py-1 bg-teal-500/30 border border-teal-400/40 rounded-full text-xs font-semibold text-teal-100">Kerupuk Ikan Renyah</span>
+                <span id="comm-tag3" class="px-3 py-1 bg-indigo-500/30 border border-indigo-400/40 rounded-full text-xs font-semibold text-indigo-100">Kolagen Halal Sisik Ikan</span>
+              </div>
+            </div>
+
+            <!-- Background Decorative Shape -->
+            <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+          </div>
+
+          <!-- 4 PILAR STEM CARDS FOR ACTIVE COMMODITY -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="stem-cards-grid">
+            
+            <!-- Card 1: Science -->
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:border-emerald-300 hover:bg-emerald-50/20 transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                      S
+                    </div>
+                    <div>
+                      <span class="text-xs font-bold text-emerald-600 uppercase">Sains Pangan</span>
+                      <h4 id="stem-sci-title" class="text-lg font-bold text-slate-900">Osmosis &amp; Denaturasi Protein</h4>
+                    </div>
+                  </div>
+                  <span class="text-xs font-bold px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-slate-600">Science</span>
+                </div>
+                <div id="stem-sci-desc" class="text-sm text-slate-600 space-y-2.5 leading-relaxed">
+                  <p><strong>Osmosis:</strong> Penambahan garam pada daging ikan menarik air bebas (Aw), menekan laju pertumbuhan bakteri pembusuk <em>Pseudomonas</em>.</p>
+                  <p><strong>Denaturasi Protein:</strong> Pengaturan suhu pemanasan meregangkan ikatan aktomiosin tanpa merusak tekstur kekenyalan fillet.</p>
+                  <p><strong>Pencegahan Histamin:</strong> Pengendalian enzimatis segera setelah tangkapan mencegah asam amino histidin terurai menjadi histamin racun.</p>
+                </div>
+              </div>
+              <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center justify-end">
+                <button onclick="openDetailModal('science')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 group">
+                  <span>Lihat Detail Konsep</span>
+                  <span class="group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 2: Technology -->
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:border-teal-300 hover:bg-teal-50/20 transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold">
+                      T
+                    </div>
+                    <div>
+                      <span class="text-xs font-bold text-teal-600 uppercase">Teknologi Modern</span>
+                      <h4 id="stem-tech-title" class="text-lg font-bold text-slate-900">Deboning &amp; Dehydrator Presisi</h4>
+                    </div>
+                  </div>
+                  <span class="text-xs font-bold px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-slate-600">Technology</span>
+                </div>
+                <div id="stem-tech-desc" class="text-sm text-slate-600 space-y-2.5 leading-relaxed">
+                  <p><strong>Mesin Deboning Mekanis:</strong> Memisahkan duri halus dari daging lumat (surimi) dengan drum berlubang putaran tinggi secara higienis.</p>
+                  <p><strong>Vacuum Sealer Nitrogen Flush:</strong> Menghilangkan oksigen bebas dari kemasan fillet untuk mencegah ketengikan oksidatif lemak omega-3.</p>
+                  <p><strong>Dehydrator Suhu Rendah (40-50°C):</strong> Mengeringkan sisik ikan untuk ekstraksi gelatin/kolagen tanpa merusak ikatan peptida bioaktif.</p>
+                </div>
+              </div>
+              <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center justify-end">
+                <button onclick="openDetailModal('technology')" class="text-xs font-bold text-teal-600 hover:text-teal-700 flex items-center gap-1 group">
+                  <span>Lihat Detail Konsep</span>
+                  <span class="group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 3: Engineering -->
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:border-blue-300 hover:bg-blue-50/20 transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
+                      E
+                    </div>
+                    <div>
+                      <span class="text-xs font-bold text-blue-600 uppercase">Rekayasa &amp; Sistem</span>
+                      <h4 id="stem-eng-title" class="text-lg font-bold text-slate-900">Rantai Dingin &amp; Layout HACCP</h4>
+                    </div>
+                  </div>
+                  <span class="text-xs font-bold px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-slate-600">Engineering</span>
+                </div>
+                <div id="stem-eng-desc" class="text-sm text-slate-600 space-y-2.5 leading-relaxed">
+                  <p><strong>Rekayasa Rantai Dingin (Cold-Chain):</strong> Sistem terinsulasi termal menjaga suhu produk stabil 0°C – 4°C dari pemanenan hingga distribusi.</p>
+                  <p><strong>Tata Letak Alur Pemotongan Linear:</strong> Desain aliran kerja searah (one-way flow) di ruang bersih mencegah kontaminasi silang limbah ke produk fillet.</p>
+                  <p><strong>Sirkulasi Zero-Waste:</strong> Desain saluran tangkapan samping memilah kepala, jeroan untuk silase pakan, dan sisik untuk kolagen.</p>
+                </div>
+              </div>
+              <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center justify-end">
+                <button onclick="openDetailModal('engineering')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 group">
+                  <span>Lihat Detail Konsep</span>
+                  <span class="group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 4: Mathematics -->
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:border-indigo-300 hover:bg-indigo-50/20 transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">
+                      M
+                    </div>
+                    <div>
+                      <span class="text-xs font-bold text-indigo-600 uppercase">Matematika &amp; Ekonomi</span>
+                      <h4 id="stem-math-title" class="text-lg font-bold text-slate-900">Yield Fillet &amp; Konversi Kadar Air</h4>
+                    </div>
+                  </div>
+                  <span class="text-xs font-bold px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-slate-600">Mathematics</span>
+                </div>
+                <div id="stem-math-desc" class="text-sm text-slate-600 space-y-2.5 leading-relaxed">
+                  <p><strong>Kalkulasi Rendemen Fillet:</strong> <code class="bg-indigo-50 text-indigo-800 px-1 py-0.5 rounded font-mono">Yield (%) = (Berat Fillet Bersih / Berat Ikan Utuh) × 100%</code>. Kisaran standar: 35% – 45%.</p>
+                  <p><strong>Neraca Massa Kadar Air:</strong> Menghitung penyusutan berat saat penggorengan kerupuk dari adonan basah (kadar air 45%) menjadi kerupuk siap santap (kadar air &lt; 5%).</p>
+                  <p><strong>Rasio Nilai Tambah:</strong> Kenaikan margin dari ikan mentah (Rp 25.000/kg) menjadi fillet beku (Rp 75.000/kg) &amp; kolagen peptide (Rp 400.000/kg).</p>
+                </div>
+              </div>
+              <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center justify-end">
+                <button onclick="openDetailModal('mathematics')" class="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1 group">
+                  <span>Lihat Detail Konsep</span>
+                  <span class="group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: INTERACTIVE WORKFLOW (ALUR PRODUKSI) -->
+    <section id="workflow" class="py-20 bg-slate-50 border-b border-slate-200/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+          <div>
+            <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+              Alur Produksi
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-1">
+              Klik setiap langkah pada flowchart di bawah untuk melihat rincian proses dan parameter teknis.
+            </p>
+          </div>
+
+          <!-- Selector Workflow -->
+          <div class="flex items-center gap-2">
+            <label for="workflow-select" class="text-xs font-bold text-slate-500 uppercase tracking-wide">Pilih Alur:</label>
+            <select id="workflow-select" onchange="changeWorkflow(this.value)" class="bg-white border border-slate-300 font-semibold text-sm rounded-xl px-4 py-2 text-slate-800 shadow-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none cursor-pointer">
+              <option value="singkong-mocaf">Singkong ➔ Tepung MOCAF</option>
+              <option value="ikan-fillet">Ikan Segar ➔ Fillet &amp; Kerupuk</option>
+              <option value="sawit-sabun">Minyak Sawit ➔ Sabun Batang</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- FLOWCHART CONTAINER -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-sm overflow-hidden">
+          
+          <div class="flex items-center justify-between pb-6 border-b border-slate-100 mb-8">
+            <div>
+              <h3 id="wf-active-title" class="text-xl font-bold text-slate-900">Alur Produksi: Singkong ➔ Tepung MOCAF</h3>
+              <p id="wf-active-subtitle" class="text-xs sm:text-sm text-slate-500 mt-0.5">Modifikasi pati secara mikrobiologis menggunakan Bakteri Asam Laktat.</p>
+            </div>
+          </div>
+
+          <!-- Step Items Flow Grid -->
+          <div id="workflow-steps-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 relative">
+            <!-- Dynamic Steps populated via JS -->
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: KALKULATOR INTERAKTIF STEM -->
+    <section id="kalkulator" class="py-20 bg-white border-b border-slate-200/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+            Kalkulator STEM
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-2">
+            Simulasikan neraca bahan baku, estimasi hasil jadi, biaya operasional, dan proyeksi laba usaha.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- FORM INPUT CARD (LEFT) -->
+          <div class="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
+              <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+                Parameter Produksi
+              </h3>
+            </div>
+
+            <!-- Presets buttons -->
+            <div class="mb-5">
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Pilihan Skala:</label>
+              <div class="grid grid-cols-3 gap-2">
+                <button type="button" onclick="applyPreset(10, 3000, 25000)" class="px-2 py-1.5 text-xs font-semibold rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition-colors">
+                  Lab (10 kg)
+                </button>
+                <button type="button" onclick="applyPreset(100, 3000, 150000)" class="px-2 py-1.5 text-xs font-semibold rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition-colors">
+                  UMKM (100 kg)
+                </button>
+                <button type="button" onclick="applyPreset(500, 2800, 600000)" class="px-2 py-1.5 text-xs font-semibold rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition-colors">
+                  Pilot (500 kg)
+                </button>
+              </div>
+            </div>
+
+            <form id="calc-form" class="space-y-5" onsubmit="event.preventDefault(); calculateSTEM();">
+              
+              <!-- 1. Bahan Pangan Dropdown -->
+              <div>
+                <label for="calc-commodity" class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">
+                  1. Pilih Komoditas &amp; Produk
+                </label>
+                <select id="calc-commodity" onchange="onCommodityChange(this.value)" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 font-semibold text-sm shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                  <option value="singkong-mocaf">Singkong ➔ Tepung MOCAF (Rendemen ~28%)</option>
+                  <option value="ikan-fillet">Ikan Segar ➔ Fillet Segar (Rendemen ~40%)</option>
+                  <option value="ikan-kerupuk">Ikan ➔ Kerupuk Ikan Renyah (Rendemen ~75%)</option>
+                  <option value="sawit-sabun">Minyak Kelapa Sawit ➔ Sabun Alami Batang (Rendemen ~120%)</option>
+                </select>
+              </div>
+
+              <!-- 2. Jumlah Bahan Mentah (kg) -->
+              <div>
+                <div class="flex items-center justify-between mb-1.5">
+                  <label for="calc-raw-weight" class="text-xs font-bold text-slate-700 uppercase tracking-wide">
+                    2. Berat Bahan Mentah (kg)
+                  </label>
+                  <span id="label-raw-weight" class="text-xs font-bold text-indigo-700 font-mono">50 kg</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <input type="range" id="calc-slider-weight" min="5" max="500" step="5" value="50" oninput="syncWeightSlider(this.value)" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+                  <div class="relative w-28 shrink-0">
+                    <input type="number" id="calc-raw-weight" min="1" max="10000" value="50" oninput="syncWeightInput(this.value)" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-right font-mono font-bold text-slate-900 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                    <span class="absolute left-2.5 top-2.5 text-xs text-slate-400 font-semibold">kg</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Harga Bahan Mentah per kg -->
+              <div>
+                <label for="calc-raw-price" class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">
+                  3. Harga Bahan Mentah per kg (Rp)
+                </label>
+                <div class="relative">
+                  <span class="absolute left-3.5 top-2.5 text-xs text-slate-500 font-bold">Rp</span>
+                  <input type="number" id="calc-raw-price" min="0" step="500" value="3000" oninput="calculateSTEM()" class="w-full bg-white border border-slate-300 rounded-xl pl-10 pr-4 py-2.5 text-slate-900 font-mono font-bold text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+                <p id="calc-price-hint" class="text-[11px] text-slate-500 mt-1">Estimasi harga pasar singkong mentah: Rp 2.500 - 3.500/kg</p>
+              </div>
+
+              <!-- 4. Biaya Operasional & Bahan Pendukung (Rp) -->
+              <div>
+                <label for="calc-overhead" class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">
+                  4. Biaya Operasional &amp; Pendukung (Rp)
+                </label>
+                <div class="relative">
+                  <span class="absolute left-3.5 top-2.5 text-xs text-slate-500 font-bold">Rp</span>
+                  <input type="number" id="calc-overhead" min="0" step="5000" value="75000" oninput="calculateSTEM()" class="w-full bg-white border border-slate-300 rounded-xl pl-10 pr-4 py-2.5 text-slate-900 font-mono font-bold text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+                <p class="text-[11px] text-slate-500 mt-1">Ragi/starter/lye, listrik, air sanitasi, kemasan plastik, dan gas.</p>
+              </div>
+
+              <!-- 5. Kustomisasi Rendemen & Margin Target -->
+              <div class="pt-4 border-t border-slate-200 grid grid-cols-2 gap-4">
+                <div>
+                  <label for="calc-rendemen-input" class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    % Rendemen
+                  </label>
+                  <div class="relative">
+                    <input type="number" id="calc-rendemen-input" min="1" max="200" step="1" value="28" oninput="calculateSTEM()" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-right font-mono font-bold text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                    <span class="absolute right-2.5 top-2 text-xs text-slate-400 font-bold">%</span>
+                  </div>
+                </div>
+                <div>
+                  <label for="calc-margin-input" class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Target Margin
+                  </label>
+                  <div class="relative">
+                    <input type="number" id="calc-margin-input" min="5" max="150" step="5" value="30" oninput="calculateSTEM()" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-right font-mono font-bold text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                    <span class="absolute right-2.5 top-2 text-xs text-slate-400 font-bold">%</span>
+                  </div>
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- OUTPUT RESULT CARDS (RIGHT) -->
+          <div class="lg:col-span-7 space-y-6">
+            
+            <!-- Result Main Summary Dashboard -->
+            <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+              <div class="relative z-10">
+                <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                  <div>
+                    <h4 class="text-xl font-extrabold text-white">Hasil Perhitungan</h4>
+                  </div>
+                  <span id="output-product-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/30 border border-indigo-400/50 text-indigo-200">
+                    Tepung MOCAF
+                  </span>
+                </div>
+
+                <!-- Big Key Numbers Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+                  <!-- Output 1: Hasil Produk Jadi -->
+                  <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+                    <span class="text-xs text-slate-300 font-medium block">Estimasi Produk Jadi (Yield):</span>
+                    <div class="flex items-baseline gap-2 mt-1">
+                      <span id="res-yield-qty" class="text-3xl font-black font-mono text-emerald-400">14.0</span>
+                      <span id="res-yield-unit" class="text-sm font-bold text-slate-300">kg tepung</span>
+                    </div>
+                    <div class="text-[11px] text-slate-400 mt-1">Dari 50 kg bahan mentah singkong</div>
+                  </div>
+
+                  <!-- Output 2: Total Biaya Produksi -->
+                  <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+                    <span class="text-xs text-slate-300 font-medium block">Total Biaya Produksi:</span>
+                    <div class="flex items-baseline gap-1 mt-1">
+                      <span class="text-lg font-bold text-slate-300">Rp</span>
+                      <span id="res-total-cost" class="text-3xl font-black font-mono text-white">225.000</span>
+                    </div>
+                    <div class="text-[11px] text-slate-400 mt-1">Bahan Baku + Biaya Operasional</div>
+                  </div>
+                </div>
+
+                <!-- Secondary Numbers Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-slate-800">
+                  <div class="bg-white/5 rounded-xl p-3 border border-white/5">
+                    <span class="text-[11px] text-slate-400 block">HPP per Satuan</span>
+                    <div class="text-lg font-bold font-mono text-teal-300 mt-0.5" id="res-hpp">Rp 16.071/kg</div>
+                    <span class="text-[10px] text-slate-400">Titik Impas (BEP Unit)</span>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-3 border border-white/5">
+                    <span class="text-[11px] text-slate-400 block">Rekomendasi Jual (+30%)</span>
+                    <div class="text-lg font-bold font-mono text-indigo-300 mt-0.5" id="res-selling-price">Rp 20.893/kg</div>
+                    <span class="text-[10px] text-slate-400">Standar Harga Pasar</span>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-3 border border-white/5">
+                    <span class="text-[11px] text-slate-400 block">Proyeksi Laba Bersih</span>
+                    <div class="text-lg font-bold font-mono text-emerald-300 mt-0.5" id="res-net-profit">+Rp 67.500</div>
+                    <span class="text-[10px] text-emerald-400 font-bold" id="res-roi">Margin: 30.0%</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Background Glow -->
+              <div class="absolute -right-16 -top-16 w-60 h-60 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            </div>
+
+            <!-- Mathematical Breakdown Card -->
+            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6">
+              <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wide flex items-center gap-2 mb-3">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                Uraian Rumus STEM (Mathematics Step-by-Step)
+              </h4>
+
+              <div class="space-y-2.5 font-mono text-xs text-slate-700 bg-white p-4 rounded-2xl border border-slate-200">
+                <div class="flex items-start justify-between">
+                  <span class="text-slate-500">1. Hasil Jadi:</span>
+                  <span id="formula-yield" class="font-bold text-slate-900 text-right">50 kg × 28% = 14.0 kg</span>
+                </div>
+                <div class="flex items-start justify-between">
+                  <span class="text-slate-500">2. Total Modal:</span>
+                  <span id="formula-cost" class="font-bold text-slate-900 text-right">(50 × Rp 3.000) + Rp 75.000 = Rp 225.000</span>
+                </div>
+                <div class="flex items-start justify-between">
+                  <span class="text-slate-500">3. HPP Satuan:</span>
+                  <span id="formula-hpp" class="font-bold text-slate-900 text-right">Rp 225.000 / 14.0 kg = Rp 16.071/kg</span>
+                </div>
+                <div class="flex items-start justify-between">
+                  <span class="text-slate-500">4. Harga Jual (+30%):</span>
+                  <span id="formula-sell" class="font-bold text-indigo-700 text-right">Rp 16.071 × 1.30 = Rp 20.893/kg</span>
+                </div>
+              </div>
+
+              <div class="mt-4 flex items-center justify-between text-xs text-slate-500">
+                <span>Konsep: Neraca Massa &amp; Tekno-Ekonomi Industri Pangan</span>
+                <button type="button" onclick="resetCalculator()" class="text-indigo-600 font-bold hover:underline">Reset Default</button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: LAB EKSPERIMEN MANDIRI (DIY WORKSHEETS / LKPD) -->
+    <section id="lab-mandiri" class="py-20 bg-slate-50 border-b border-slate-200/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+            Lab Eksperimen Mandiri
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-2">
+            Panduan praktikum sederhana yang dapat dipraktikkan langsung di laboratorium atau dapur.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Card Eksperimen 1: Singkong ke Pati / Bioplastik -->
+          <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <div class="h-40 bg-gradient-to-tr from-amber-700 to-yellow-600 p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-center justify-between relative z-10">
+                  <span class="text-xs font-bold px-2.5 py-1 bg-white/20 backdrop-blur-md rounded-full text-white">LKPD-01</span>
+                  <span class="text-xs font-medium px-2 py-0.5 bg-black/20 rounded text-yellow-100">60 Menit</span>
+                </div>
+                <div class="relative z-10">
+                  <h3 class="text-xl font-bold text-white leading-snug">Ekstraksi Pati Singkong &amp; Bioplastik</h3>
+                </div>
+              </div>
+
+              <div class="p-6 space-y-4">
+                <div>
+                  <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tujuan Praktikum</h4>
+                  <p class="text-sm text-slate-700 mt-1">
+                    Memisahkan pati dari serat singkong dan mereaksikan pati dengan gliserol sebagai pembuat bioplastik lentur.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Alat &amp; Bahan</h4>
+                  <p class="text-xs text-slate-600 mt-1">
+                    Singkong segar, parutan/blender, kain saring, air, gliserin/minyak, asam cuka dapur.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 pt-0 border-t border-slate-100 flex items-center gap-3">
+              <button onclick="openLkpdModal('singkong-pati')" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition-all text-center">
+                Buka Lembar Kerja
+              </button>
+              <button onclick="printLkpdDirect('singkong-pati')" title="Cetak / Unduh PDF LKPD" class="p-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-bold transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card Eksperimen 2: Minyak Kelapa Sawit ke Sabun -->
+          <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <div class="h-40 bg-gradient-to-tr from-amber-600 via-orange-600 to-red-600 p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-center justify-between relative z-10">
+                  <span class="text-xs font-bold px-2.5 py-1 bg-white/20 backdrop-blur-md rounded-full text-white">LKPD-02</span>
+                  <span class="text-xs font-medium px-2 py-0.5 bg-black/20 rounded text-orange-100">45 Menit</span>
+                </div>
+                <div class="relative z-10">
+                  <h3 class="text-xl font-bold text-white leading-snug">Saponifikasi Minyak Kelapa Sawit Menjadi Sabun</h3>
+                </div>
+              </div>
+
+              <div class="p-6 space-y-4">
+                <div>
+                  <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tujuan Praktikum</h4>
+                  <p class="text-sm text-slate-700 mt-1">
+                    Mempelajari reaksi hidrolisis trigliserida sawit dengan alkali (NaOH) metode Cold Process dan mengamati pembentukan sabun.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Alat &amp; Bahan</h4>
+                  <p class="text-xs text-slate-600 mt-1">
+                    Minyak kelapa sawit, larutan NaOH teknis, air suling, wadah tahan panas, spatula pengaduk, cetakan sabun.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 pt-0 border-t border-slate-100 flex items-center gap-3">
+              <button onclick="openLkpdModal('sawit-sabun')" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition-all text-center">
+                Buka Lembar Kerja
+              </button>
+              <button onclick="printLkpdDirect('sawit-sabun')" title="Cetak / Unduh PDF LKPD" class="p-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-bold transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card Eksperimen 3: Ikan Osmosis & Kerupuk -->
+          <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <div class="h-40 bg-gradient-to-tr from-cyan-700 to-blue-700 p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-center justify-between relative z-10">
+                  <span class="text-xs font-bold px-2.5 py-1 bg-white/20 backdrop-blur-md rounded-full text-white">LKPD-03</span>
+                  <span class="text-xs font-medium px-2 py-0.5 bg-black/20 rounded text-cyan-100">90 Menit</span>
+                </div>
+                <div class="relative z-10">
+                  <h3 class="text-xl font-bold text-white leading-snug">Osmosis Garam &amp; Tekstur Kerupuk Ikan</h3>
+                </div>
+              </div>
+
+              <div class="p-6 space-y-4">
+                <div>
+                  <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tujuan Praktikum</h4>
+                  <p class="text-sm text-slate-700 mt-1">
+                    Menganalisis pengaruh garam terhadap perpindahan air daging ikan serta gelatinisasi tapioka saat pengukusan kerupuk.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Alat &amp; Bahan</h4>
+                  <p class="text-xs text-slate-600 mt-1">
+                    Daging ikan giling, tepung tapioka, garam dapur, timbangan, panci kukusan, wadah perendam.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 pt-0 border-t border-slate-100 flex items-center gap-3">
+              <button onclick="openLkpdModal('ikan-osmosis')" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition-all text-center">
+                Buka Lembar Kerja
+              </button>
+              <button onclick="printLkpdDirect('ikan-osmosis')" title="Cetak / Unduh PDF LKPD" class="p-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-bold transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        
+        <div class="md:col-span-1">
+          <div class="flex items-center gap-2.5 mb-3">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-500 to-indigo-500 flex items-center justify-center text-white font-black text-xs">
+              AS
+            </div>
+            <span class="text-lg font-bold text-white">AgroSTEM</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Platform edukasi terpadu sains, teknologi, rekayasa, dan matematika untuk pengolahan bahan pangan lokal Indonesia.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">Menu</h4>
+          <ul class="space-y-1.5 text-xs">
+            <li><a href="#beranda" class="hover:text-white transition-colors">4 Pilar STEM</a></li>
+            <li><a href="#eksplorasi" class="hover:text-white transition-colors">Eksplorasi Bahan Pangan</a></li>
+            <li><a href="#workflow" class="hover:text-white transition-colors">Alur Produksi</a></li>
+            <li><a href="#kalkulator" class="hover:text-white transition-colors">Kalkulator STEM</a></li>
+            <li><a href="#lab-mandiri" class="hover:text-white transition-colors">Lab Eksperimen</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">Komoditas Utama</h4>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg">Ikan (Fillet &amp; Kerupuk)</span>
+            <span class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg">Singkong (MOCAF)</span>
+            <span class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg">Kelapa Sawit (Sabun)</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-6 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p>&copy; 2026 AgroSTEM. Platform edukasi terbuka pengolahan pangan lokal.</p>
+        <span class="text-slate-500">Inovasi Pangan Berkelanjutan</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL OVERLAYS ==================== -->
+
+  <!-- 1. MODAL DETAIL PILAR STEM -->
+  <div id="modal-stem" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal('modal-stem')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm">
+        ✕
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div id="modal-stem-icon-wrap" class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-xl">
+          S
+        </div>
+        <div>
+          <span id="modal-stem-badge" class="text-xs font-bold uppercase tracking-wider text-emerald-600">Pilar Sains</span>
+          <h3 id="modal-stem-title" class="text-xl font-extrabold text-slate-900">Judul Detail Pilar</h3>
+        </div>
+      </div>
+
+      <div id="modal-stem-body" class="text-sm text-slate-700 space-y-4 leading-relaxed mt-4">
+        <!-- Content inserted dynamically -->
+      </div>
+
+      <div class="mt-8 pt-4 border-t border-slate-200 flex justify-end">
+        <button onclick="closeModal('modal-stem')" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs rounded-xl transition-colors">
+          Tutup Pembahasan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MODAL DETAIL STEP WORKFLOW -->
+  <div id="modal-workflow-step" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal('modal-workflow-step')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm">
+        ✕
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <span id="wf-modal-step-number" class="w-9 h-9 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-sm">
+          1
+        </span>
+        <div>
+          <span class="text-xs font-bold text-teal-600 uppercase tracking-wide">Spesifikasi Operasi Tahap</span>
+          <h3 id="wf-modal-title" class="text-xl font-extrabold text-slate-900">Nama Tahap</h3>
+        </div>
+      </div>
+
+      <p id="wf-modal-goal" class="text-sm text-slate-600 leading-relaxed mb-6 font-medium">
+        Tujuan tahapan.
+      </p>
+
+      <div class="grid grid-cols-2 gap-3 mb-6">
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <span class="text-[11px] font-bold text-slate-500 uppercase block">Parameter Kontrol</span>
+          <span id="wf-modal-param" class="text-xs font-bold text-slate-900 mt-1 block">Suhu 28°C - 30°C</span>
+        </div>
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <span class="text-[11px] font-bold text-slate-500 uppercase block">Durasi Waktu</span>
+          <span id="wf-modal-time" class="text-xs font-bold text-slate-900 mt-1 block">24 - 48 Jam</span>
+        </div>
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <span class="text-[11px] font-bold text-slate-500 uppercase block">Mesin / Instrumen</span>
+          <span id="wf-modal-tool" class="text-xs font-bold text-slate-900 mt-1 block">Tangki Fermentasi HDPE</span>
+        </div>
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <span class="text-[11px] font-bold text-slate-500 uppercase block">Protokol K3 / Higiene</span>
+          <span id="wf-modal-k3" class="text-xs font-bold text-emerald-700 mt-1 block">Sanitasi Masker &amp; Sarung Tangan</span>
+        </div>
+      </div>
+
+      <div class="bg-teal-50/70 p-4 rounded-2xl border border-teal-200 text-xs text-teal-900 space-y-1.5">
+        <div class="font-bold">🔬 Prinsip Sains &amp; Rekayasa:</div>
+        <p id="wf-modal-science-note">Prinsip ilmiah yang bekerja pada tahap ini.</p>
+      </div>
+
+      <div class="mt-6 flex items-center justify-between">
+        <button id="wf-prev-btn" onclick="navigateWorkflowStep(-1)" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-xs font-bold">
+          ← Sebelumnya
+        </button>
+        <button id="wf-next-btn" onclick="navigateWorkflowStep(1)" class="px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold">
+          Selanjutnya →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. MODAL VIEWER LKPD & PRINT PREVIEW -->
+  <div id="modal-lkpd" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-4xl w-full p-6 sm:p-10 shadow-2xl relative max-h-[92vh] flex flex-col">
+      
+      <!-- Top Action Bar -->
+      <div class="flex items-center justify-between pb-4 border-b border-slate-200 shrink-0">
+        <div class="flex items-center gap-2">
+          <span class="text-sm font-bold text-slate-900">Lembar Kerja Praktikum</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="printCurrentLkpd()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            <span>Cetak / Unduh PDF</span>
+          </button>
+          <button onclick="closeModal('modal-lkpd')" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Printable LKPD Document Content -->
+      <div class="overflow-y-auto mt-6 pr-2 flex-grow space-y-6 text-slate-800" id="print-area">
+        <!-- Rendered LKPD content inserted dynamically -->
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between shrink-0 text-xs text-slate-500">
+        <span>Gunakan dialog cetak browser (Ctrl+P / Cmd+P) lalu pilih <strong>Save as PDF</strong>.</span>
+        <button onclick="copyLkpdText()" class="text-emerald-700 font-bold hover:underline">Salin Teks ke Clipboard</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- NOTIFICATION TOAST -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none text-xs font-semibold">
+    <span id="toast-icon">✅</span>
+    <span id="toast-msg">Notifikasi</span>
+  </div>
+
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+  <script>
+    /**
+     * DATABASE KONTEN AGROSTEM
+     */
+    const COMMODITY_DATA = {
+      ikan: {
+        category: 'Potensi Bahari & Air Tawar',
+        title: 'Komoditas Ikan Nusantara (Marine & Fresh Water)',
+        desc: 'Ikan kaya akan protein berbobot molekul tinggi, asam lemak Omega-3 (EPA/DHA), serta mineral esensial. Namun komoditas ini tergolong perishable (sangat lekas busuk). Pendekatan STEM mentransformasi ikan menjadi Fillet Segar Higienis, Kerupuk Ikan Gurih Bernutrisi, hingga Kolagen Bernilai Tinggi dari sisik dan kulit yang biasanya terbuang.',
+        tags: ['Fillet Ikan Higienis', 'Kerupuk Ikan Renyah', 'Kolagen Sisik & Kulit'],
+        science: {
+          title: 'Osmosis, Denaturasi Protein, & Histamin',
+          badge: 'Sains Biokimia',
+          color: 'emerald',
+          points: [
+            '<strong>Prinsip Osmosis:</strong> Larutan garam (NaCl) menciptakan gradien potensial air, menarik molekul air bebas keluar dari sel otot ikan, sehingga menurunkan Water Activity (Aw) di bawah 0.85 untuk menghambat mikroba patogen.',
+            '<strong>Denaturasi Aktomiosin:</strong> Protein miosin dan aktin meregang pada suhu di atas 45°C. Pengontrolan termal yang tepat saat perebusan/pengeringan menghasilkan tekstur kenyal elastis (gelation capacity).',
+            '<strong>Inhibisi Enzimatis & Histamin:</strong> Asam amino histidin pada ikan berdaging merah (seperti tongkol/tenggiri) dapat diubah oleh bakteri pembusuk menjadi racun histamin jika tidak didinginkan di bawah 4°C segera setelah tangkap.'
+          ],
+          deepDive: 'Ikan memiliki jaringan ikat yang relatif sedikit dibandingkan daging mamalia, sehingga sangat lembut namun rentan terhadap serangan enzim endogenus (autolisis). Melalui pemahaman biokimiawi, penerapan larutan brine 3-5% mampu mengoptimalkan dispersi protein miosin tanpa merusak cita rasa gurih alami asam glutamat.'
+        },
+        technology: {
+          title: 'Deboning, Vacuum Sealing, & Freeze/Dehydrator',
+          badge: 'Teknologi Peralatan',
+          color: 'teal',
+          points: [
+            '<strong>Mesin Deboning Pemisah Tulang Otomatis:</strong> Sabuk sablon karet fleksibel dan drum berpori stainless steel 304 memeras serat daging lumat (surimi) bebas duri dengan efisiensi ekstraksi >85%.',
+            '<strong>Vacuum Sealer Nitrogen Flush:</strong> Mereduksi kadar oksigen bebas di bawah 0.5% untuk mencegah autooksidasi lipid tidak jenuh ganda (PUFA/omega-3) yang menyebabkan bau tengik.',
+            '<strong>Dehydrator Suhu Rendah Kontrol Mikroprosesor:</strong> Mengeringkan sisik dan kulit ikan pada suhu terkendali 45°C demi menjaga struktur heliks triple kolagen tidak terhidrolisis menjadi gelatin rusak.'
+          ],
+          deepDive: 'Penggunaan sensor thermocouple digital pada mesin pengering memastikan panas seragam tanpa hot-spot. Sisik ikan yang dikeringkan pada suhu rendah lebih mudah mengalami demineralisasi asam asetat encer untuk isolasi kolagen tipe I murni bernilai jual hingga jutaan rupiah per kilogram.'
+        },
+        engineering: {
+          title: 'Cold-Chain Logistics & Desain Ruang Bersih HACCP',
+          badge: 'Rekayasa Alur & K3',
+          color: 'blue',
+          points: [
+            '<strong>Rantai Dingin Terintegrasi (0°C – 4°C):</strong> Penggunaan insulasi polyuretana dinding ganda pada box penanganan ikan dengan es curah higienis (rasio es : ikan = 1 : 1).',
+            '<strong>Layout Alur Satu Arah (Linear Cleanroom):</strong> Aliran bahan dari area kotor (penerimaan & penyiangan) menuju area bersih (fillet & pengemasan) dengan partisi udara positif guna menghindari kontaminasi silang.',
+            '<strong>Desain Sirkular Zero-Waste:</strong> Limbah kepala dan jeroan dialirkan via konveyor tertutup untuk difermentasi menjadi silase pakan ikan/ternak bernilai protein tinggi.'
+          ],
+          deepDive: 'Rekayasa tata letak laboratorium/pabrik dirancang berpatokan pada Hazard Analysis Critical Control Point (HACCP). Tiap meja preparasi memakai talenan polietilen berkode warna (biru untuk ikan segar) dengan saluran pembuangan air limbah bermiring 2% untuk sanitasi seketika.'
+        },
+        mathematics: {
+          title: 'Yield Fillet, Neraca Air, & Stoikiometri Nilai Tambah',
+          badge: 'Kalkulasi Presisi',
+          color: 'indigo',
+          points: [
+            '<strong>Persentase Rendemen Fillet (Yield):</strong> Berat Ikan Utuh (W₀ = 100 kg) menghasilkan Fillet Bersih (W₁ = 38 kg). Yield = (38/100) × 100% = 38%. Limbah kepala & tulang = 62%.',
+            '<strong>Neraca Pengeringan Adonan Kerupuk:</strong> Massa adonan basah (M_b = 50 kg, kadar air 40%) dikeringkan hingga kadar air 8%. Massa kering akhir = 50 × (1 - 0.40) / (1 - 0.08) = 32.6 kg kerupuk mentah.',
+            '<strong>Multiplier Ekonomi:</strong> 1 kg Ikan Utuh (Rp 25.000) ➔ 0.4 kg Fillet Premium (Rp 40.000) + 0.05 kg Kolagen Sisik Kering (Rp 35.000) = Total Nilai Jual Rp 75.000 (Peningkatan 300%).'
+          ],
+          deepDive: 'Perhitungan matematika ini menjadi dasar kelayakan finansial UMKM perikanan. Dengan meminimalkan limbah (by-product utilization), HPP per kilogram fillet dapat ditekan hingga 25% karena sisik dan tulang menopang pendapatan sekunder.'
+        }
+      },
+
+      singkong: {
+        category: 'Potensi Umbi-Umbian Unggulan',
+        title: 'Komoditas Singkong / Ubi Kayu (Manihot esculenta)',
+        desc: 'Singkong adalah komoditas karbohidrat tropis melimpah di Indonesia. Sayangnya singkong mentah mengandung glukosida sianogenik (racun HCN) dan umur simpan pascapanennya pendek karena pembusukan vaskular fisiologis. Melalui STEM, singkong diolah menjadi Tepung MOCAF (Modified Cassava Flour) pengganti gandum serta bioplastik ramah lingkungan yang terurai dalam 90 hari.',
+        tags: ['Tepung MOCAF Gluten-Free', 'Bioplastik Biodegradable', 'Bioetanol Ramah Lingkungan'],
+        science: {
+          title: 'Fermentasi Bakteri Asam Laktat & Ekstraksi Pati',
+          badge: 'Sains Biokimia',
+          color: 'emerald',
+          points: [
+            '<strong>Fermentasi Bakteri Asam Laktat (BAL):</strong> Enzim pektinolitik dan selulolitik dari <em>Lactobacillus plantarum</em> menghancurkan dinding sel singkong, membebaskan butiran pati alami.',
+            '<strong>Modifikasi Amilosa-Amilopektin:</strong> Fermentasi melonggarkan ikatan polimer pati, meningkatkan daya kembang (swelling power) dan viskositas yang menyamai karakteristik tepung terigu berprotein sedang.',
+            '<strong>Degradasi Senyawa Racun HCN:</strong> Hidrolisis enzimatis linamarase selama perendaman 24-48 jam menguapkan asam sianida (HCN) hingga kadar aman di bawah 10 ppm (standar WHO/BPOM).'
+          ],
+          deepDive: 'Bioplastik dari pati singkong memanfaatkan interaksi polimer antara rantai linier amilosa dan rantai bercabang amilopektin. Penambahan gliserol dapur sebagai zat plastisizer menyisip di antara rantai polimer, mengurangi gaya antarmolekul sehingga lembaran bioplastik lentur dan biodegradable.'
+        },
+        technology: {
+          title: 'Mesin Grater, Spinner Sentrifugal, & Solar Dome',
+          badge: 'Teknologi Peralatan',
+          color: 'teal',
+          points: [
+            '<strong>Mesin Sawut & Grater Stainless Steel:</strong> Memotong singkong menjadi irisan tipis (chips) seragam (ketebalan 1-2 mm) agar kontak penetrasi kultur bakteri merata di setiap lapisan.',
+            '<strong>Centrifugal Extractor / Spinner Pati:</strong> Pemutar berkecepatan 1.400 RPM memisahkan suspensi sari pati cair dari ampas serat kasar singkong dalam hitungan detik.',
+            '<strong>Solar Dryer Dome UV-Stabilized:</strong> Rumah pengeringan efek rumah kaca dengan kipas exhaust bertenaga surya mempercepat penguapan air higienis tanpa debu/hujan.'
+          ],
+          deepDive: 'Solar Dryer Dome memanfaatkan radiasi infra merah sinar matahari yang terperangkap plastik polietilen berlapis anti-UV. Suhu di dalam kubah dapat mencapai 50-60°C dengan kelembaban relatif &lt;30%, memangkas durasi pengeringan dari 3 hari menjadi 12 jam saja.'
+        },
+        engineering: {
+          title: 'Perancangan Sirkular Zero-Waste & Ekstraksi Bertingkat',
+          badge: 'Rekayasa Alur & K3',
+          color: 'blue',
+          points: [
+            '<strong>Desain Ekstraksi Bertahap:</strong> Alur pembersihan bertingkat memisahkan kulit luar berpasir, kulit ari tebal (untuk pakan fermentasi), dan daging umbi putih inti.',
+            '<strong>Sistem Sirkulasi Air Fermentasi Terkontrol:</strong> Bak anaerobik dilengkapi pemantau pH otomatis dan pipa penampung biogas metana untuk bahan bakar kompor pengering.',
+            '<strong>Pengendalian Limbah Padat Onggok:</strong> Ampas padat singkong setelah pemerasan pati diolah kembali menjadi bahan baku media tanam jamur tiram atau pelet briket energi.'
+          ],
+          deepDive: 'Rekayasa bioreaktor fermentasi MOCAF menggunakan sistem sirkulasi gravitasi bertingkat. Hal ini meniadakan kebutuhan pompa berdaya listrik tinggi dan menjaga kondisi anaerobik fakultatif sempurna untuk bakteri pembentuk rasa netral.'
+        },
+        mathematics: {
+          title: 'Rasio Rendemen MOCAF, Dosis Inokulum, & Laba UMKM',
+          badge: 'Kalkulasi Presisi',
+          color: 'indigo',
+          points: [
+            '<strong>Rendemen MOCAF Teoritis vs Praktis:</strong> 100 kg Singkong kupas basah menghasilkan 26 – 30 kg tepung MOCAF kering (Kadar air 11%). Rendemen rata-rata = 28%.',
+            '<strong>Kalkulasi Dosis Starter:</strong> Rekomendasi inokulum = 0.1% volume cairan. Untuk 100 kg singkong terendam dalam 100 Liter air, dibutuhkan 100 mL kultur bakteri konsentrat (10⁸ CFU/mL).',
+            '<strong>Simulasi Tekno-Ekonomi:</strong> 1 Ton Singkong mentah (Rp 1.500.000) + Starter & Operasional (Rp 700.000) ➔ 280 kg MOCAF @ Rp 14.000/kg (Rp 3.920.000). Margin laba kotor: 78%.'
+          ],
+          deepDive: 'Perhitungan stoikiometri pengeringan membuktikan bahwa penurunan kadar air dari 65% (singkong basah) menjadi 11% (tepung MOCAF) membutuhkan pelepasan 54 liter air per 100 kg singkong, membutuhkan energi termal spesifik laten sebesar 122 MJ.'
+        }
+      },
+
+      sawit: {
+        category: 'Perkebunan Berkelanjutan Nusantara',
+        title: 'Komoditas Kelapa Sawit (Elaeis guineensis)',
+        desc: 'Indonesia adalah produsen kelapa sawit terbesar di dunia. CPO (Crude Palm Oil) kaya akan asam palmitat, asam oleat, serta provitamin A (karotenoid) dan vitamin E (tokotrienol). Di lab AgroSTEM, siswa mempelajari kimia saponifikasi untuk mengolah minyak sawit menjadi Sabun Alami Batangan (Soap Bar) ramah kulit dan lilin aromaterapi ramah lingkungan.',
+        tags: ['Sabun Padat Alami (Cold-Process)', 'CPO Kaya Vitamin E', 'Zero Carbon Palm-Wax'],
+        science: {
+          title: 'Reaksi Saponifikasi & Fungsi Antioksidan CPO',
+          badge: 'Sains Biokimia',
+          color: 'emerald',
+          points: [
+            '<strong>Reaksi Saponifikasi:</strong> Trigliserida (lemak sawit) + Natrium Hidroksida (3 NaOH) ➔ Gliserol Alami (pelembab kulit) + 3 Molekul Garam Sabun (R-COONa).',
+            '<strong>Profil Asam Lemak Keseimbangan:</strong> Sawit memiliki ~44% asam palmitat (pembentuk busa stabil dan sabun padat keras) serta ~39% asam oleat (menghidrasi kulit lembut).',
+            '<strong>Peran Karotenoid & Tokoferol:</strong> Minyak sawit merah (Virgin Red Palm Oil) bertindak sebagai antioksidan alami penangkal radikal bebas dan memberi warna kuning emas tanpa pewarna sintetis.'
+          ],
+          deepDive: 'Reaksi saponifikasi bersifat eksotermik (melepaskan energi panas). Saat larutan lindi (NaOH) dicampurkan ke dalam minyak sawit, terjadi kenaikan suhu spontan hingga 55-65°C. Fase pengadukan emulsi menghasilkan fenomena "trace" di mana viskositas larutan mengental seperti puding.'
+        },
+        technology: {
+          title: 'Press Hidrostatik, Stirrer Suhu Konstan, & pH Tester',
+          badge: 'Teknologi Peralatan',
+          color: 'teal',
+          points: [
+            '<strong>Press Hidrostatik Mini:</strong> Ekstraksi minyak dari serabut mesokarp buah sawit dengan tekanan hidrolik presisi tanpa menggunakan pelarut kimia heksana.',
+            '<strong>Digital Constant-Temperature Magnetic Stirrer:</strong> Mengaduk emulsi minyak dan alkali dengan kecepatan 800 RPM pada temperatur stabil 45°C untuk homogenitas saponifikasi sempurna.',
+            '<strong>Refraktometer & pH Tester Digital:</strong> Mengukur kemurnian indeks bias minyak serta memastikan pH sabun matang berada pada rentang aman kulit (pH 8.5 – 9.5) pasca masa curing.'
+          ],
+          deepDive: 'Penggunaan immersion blender elektrik mempercepat proses emulsi mekanis dari 2 jam pengadukan manual menjadi hanya 8-12 menit hingga mencapai titik "trace" homogen yang mencegah fase pemisahan minyak (oil separation).'
+        },
+        engineering: {
+          title: 'Filtrasi Bertingkat CPO & Standar Keselamatan K3 Lab',
+          badge: 'Rekayasa Alur & K3',
+          color: 'blue',
+          points: [
+            '<strong>Tata Letak Filtrasi Membran Bertingkat:</strong> Memisahkan kotoran fisik, lumpur kelapa sawit, dan air terdispersi dari CPO sebelum direaksikan.',
+            '<strong>Protokol K3 / HSE Penanganan Basa Kuat:</strong> Prosedur ketat: "Selalu tuangkan butiran NaOH ke dalam air dingin, BUKAN sebaliknya" untuk mencegah cipratan ledakan eksotermik.',
+            '<strong>Alur Ruang Curing Bertingkat:</strong> Desain rak kayu berongga dengan sirkulasi udara konstan (kelembaban 50-60%) selama 4 minggu untuk proses saponifikasi tuntas (curing period).'
+          ],
+          deepDive: 'Rekayasa ruang curing mengontrol sirkulasi udara pasif untuk menguapkan kelebihan air secara bertahap. Hal ini menghasilkan batangan sabun padat yang tidak lekas lembek ketika terkena air kamar mandi, tanpa membutuhkan bahan pengeras sintetis sintetis.'
+        },
+        mathematics: {
+          title: 'Stoikiometri Mol Saponifikasi, Angka SAP, & Biaya Batch',
+          badge: 'Kalkulasi Presisi',
+          color: 'indigo',
+          points: [
+            '<strong>Angka Penyabunan (SAP Value):</strong> Minyak sawit memiliki SAP value NaOH = 0.141. Artinya setiap 1 gram minyak sawit murni membutuhkan 0.141 gram NaOH murni.',
+            '<strong>Perhitungan Lye Diskon (Superfatting 5%):</strong> Untuk 1.000 g Minyak Sawit: Kebutuhan NaOH murni = 1.000 × 0.141 = 141 g. Dengan superfat 5%: NaOH dipakai = 141 × 0.95 = 133.95 g.',
+            '<strong>Neraca Produk Sabun Padat:</strong> 1.000 g Minyak + 134 g NaOH + 280 g Air = 1.414 g massa adonan sabun (setara 14 batang sabun @ 100 gram). HPP per batang hanya Rp 2.500.'
+          ],
+          deepDive: 'Stoikiometri mol sabun melibatkan perbandingan mol 1 : 3. Menghitung berat molekul rata-rata trigliserida sawit (tripalmitin ~807 g/mol) membuktikan efisiensi konversi massa produk mencapai >120% dari bobot minyak mentah awal.'
+        }
+      }
+    };
+
+    /**
+     * DATABASE ALUR PRODUKSI (WORKFLOW STEPS)
+     */
+    const WORKFLOW_DATA = {
+      'singkong-mocaf': {
+        title: 'Singkong Mentah ➔ Tepung MOCAF Premium',
+        subtitle: 'Proses modifikasi pati secara mikrobiologis menggunakan kultur Bakteri Asam Laktat (BAL).',
+        steps: [
+          {
+            num: 1,
+            name: 'Pembersihan & Pengupasan',
+            shortDesc: 'Pembuangan tanah dan kulit ari singkong dengan air mengalir.',
+            goal: 'Menghilangkan kontaminan tanah, mikroba pembusuk liar, dan memisahkan kulit ari tebal singkong.',
+            param: 'Suhu air 25°C, sanitasi food-grade',
+            time: '15 - 30 Menit',
+            tool: 'Pisau Stainless & Washer Tub',
+            k3: 'Sarung tangan anti-sayat & apron kedap air',
+            science: 'Kulit singkong mengandung linamarase dan konsentrasi HCN tertinggi. Pengupasan bersih menyingkirkan hingga 70% potensi sianida awal.'
+          },
+          {
+            num: 2,
+            name: 'Perajangan Tipis (Slicing)',
+            shortDesc: 'Pemotongan singkong menjadi chips pipih 1.5 - 2 mm.',
+            goal: 'Memperluas luas permukaan bidang kontak untuk penetrasi inokulum bakteri asam laktat.',
+            param: 'Ketebalan irisan 1.5 - 2.0 mm',
+            time: '20 Menit / 50 kg',
+            tool: 'Mesin Slicer / Food Grater',
+            k3: 'Pelindung jari mesin berputar & tombol emergency stop',
+            science: 'Hukum difusi Fick: Laju penetrasi cairan inokulum berbanding terbalik dengan kuadrat ketebalan bahan singkong.'
+          },
+          {
+            num: 3,
+            name: 'Fermentasi Anaerobik BAL',
+            shortDesc: 'Perendaman singkong dengan biang kultur Lactobacillus.',
+            goal: 'Memodifikasi granula amilosa-amilopektin dan mengeliminasi sisa sianida (HCN).',
+            param: 'Suhu 28°C - 32°C, pH turun ke 3.8 - 4.2',
+            time: '24 - 48 Jam',
+            tool: 'Tangki Fermentasi Food-Grade HDPE',
+            k3: 'Penutupan rapat kedap udara & sanitasi kran',
+            science: 'BAL memproduksi asam laktat yang menurunkan pH drastis, membunuh bakteri patogen, dan melepaskan enzim linamarase pengurai racun sianida menjadi gas HCN yang terbuang.'
+          },
+          {
+            num: 4,
+            name: 'Pengeringan (Solar Dome)',
+            shortDesc: 'Evaporasi kadar air hingga di bawah 12%.',
+            goal: 'Menghentikan aktivitas fermentasi dan memastikan stabilitas daya simpan tepung jangka panjang.',
+            param: 'Suhu 45°C - 55°C, Rh udara < 35%',
+            time: '8 - 14 Jam',
+            tool: 'Solar Dryer Dome / Rak Kasa Stainless',
+            k3: 'Pengecekan kebersihan rak dari debu sekitar',
+            science: 'Air terikat dalam pati dilepaskan secara bertahap tanpa terjadi fenomena "case hardening" (permukaan mengeras sementara bagian dalam masih basah).'
+          },
+          {
+            num: 5,
+            name: 'Penepungan & Pengayakan',
+            shortDesc: 'Penggilingan chips kering dan pengayakan 80 - 100 mesh.',
+            goal: 'Menghasilkan serbuk tepung MOCAF bertekstur halus lembut yang homogen.',
+            param: 'Derajat kehalusan 100 Mesh, kadar air max 12%',
+            time: '30 Menit',
+            tool: 'Hammer Mill & Vibrating Sieve Mesh 100',
+            k3: 'Masker respirator debu N95 & penutup telinga',
+            science: 'Gaya gesek dan tumbukan mekanis menghancurkan granula pati kering menjadi ukuran mikron yang siap berikatan dengan air adonan kue.'
+          }
+        ]
+      },
+
+      'ikan-fillet': {
+        title: 'Ikan Segar ➔ Fillet Beku & Kerupuk Ikan Renyah',
+        subtitle: 'Penanganan higienis rantai dingin serta pengolahan daging lumat menjadi kerupuk.',
+        steps: [
+          {
+            num: 1,
+            name: 'Penerimaan & Sortasi Suhu',
+            shortDesc: 'Inspeksi kesegaran ikan dan pemeliharaan es pendingin.',
+            goal: 'Memverifikasi bahwa ikan masih dalam kondisi pre-rigor atau rigor mortis dengan mata jernih dan insang merah.',
+            param: 'Suhu daging ikan ≤ 4.0°C',
+            time: '15 Menit',
+            tool: 'Termometer Tusuk Digital & Box Insulasi',
+            k3: 'Sepatu boot anti-selip & sarung tangan termal',
+            science: 'Pertumbuhan bakteri pembusuk <em>Shewanella</em> dan <em>Pseudomonas</em> terhenti hampir 90% pada rentang suhu 0 - 4°C.'
+          },
+          {
+            num: 2,
+            name: 'Penyiangan & Pemfilletan',
+            shortDesc: 'Pembuangan jeroan, kepala, dan penyayatan daging fillet.',
+            goal: 'Memisahkan daging murni dari tulang belakang dengan meminimalkan kehilangan serat daging.',
+            param: 'Waktu per ekor < 45 detik di ruang sejuk (18°C)',
+            time: '30 - 45 Menit',
+            tool: 'Pisau Fillet Fleksibel & Talenan PE Biru',
+            k3: 'Sarung tangan pelindung kawat baja tahan karat (chainmail)',
+            science: 'Penyayatan searah serat otot miosin mempertahankan keutuhan protein aktomiosin dan mencegah kebocoran cairan seluler (drip loss).'
+          },
+          {
+            num: 3,
+            name: 'Pencucian Salin & Deboning',
+            shortDesc: 'Pencucian air es bersalinitas 0.5% & ekstraksi tulang.',
+            goal: 'Menyingkirkan darah, pigmen mioglobin, serta duri halus pengganggu.',
+            param: 'Salinitas NaCl 0.5%, suhu air 2°C',
+            time: '15 Menit',
+            tool: 'Mesin Pemisah Duri Mekanis (Deboner)',
+            k3: 'Sanitasi klorin food-grade 5 ppm',
+            science: 'Larutan garam hipotonis ringan melarutkan protein sarkoplasma tanpa menghilangkan protein miofibrilar yang berfungsi membentuk gel elastis kerupuk.'
+          },
+          {
+            num: 4,
+            name: 'Pencampuran & Gelatinisasi Kerupuk',
+            shortDesc: 'Pengadukan dengan pati tapioka & pengukusan adonan.',
+            goal: 'Membentuk matriks adonan kerupuk elastis yang tergelatinisasi sempurna.',
+            param: 'Rasio Ikan : Tapioka = 1 : 1, kukus 100°C',
+            time: '45 Menit Pengukusan',
+            tool: 'Mixer Spiral & Steamer Tekanan Atmosfer',
+            k3: 'Sarung tangan insulasi panas tahan uap',
+            science: 'Suhu 100°C mendidihkan air intraseluler dan menyebabkan granula pati tapioka pecah (gelatinisasi), memerangkap protein ikan dalam jaringan polimer kenyal.'
+          },
+          {
+            num: 5,
+            name: 'Pengirisan & Dehidrasi Pengeringan',
+            shortDesc: 'Pendinginan adonan, pengirisan tipis, & penjemuran.',
+            goal: 'Menghasilkan keping kerupuk mentah kering dengan kadar air di bawah 8%.',
+            param: 'Ketebalan 1 mm, kadar air akhir < 8%',
+            time: '12 Jam Dehidrasi',
+            tool: 'Mesin Slicer Kerupuk & Tray Dehydrator',
+            k3: 'Pengecekan kelembaban ruangan dengan hygrometer',
+            science: 'Kadar air rendah (<8%) esensial agar saat digoreng dalam minyak panas 180°C, sisa air mendadak menguap cepat dan meledakkan pori-pori kerupuk mengembang renyah.'
+          }
+        ]
+      },
+
+      'sawit-sabun': {
+        title: 'Minyak Sawit CPO ➔ Sabun Alami Batangan (Soap Bar)',
+        subtitle: 'Saponifikasi dingin terkontrol (Cold-Process Saponification) dan masa pematangan (Curing).',
+        steps: [
+          {
+            num: 1,
+            name: 'Pemurnian & Pemanasan CPO',
+            shortDesc: 'Filtrasi serat dan pemanasan minyak ke suhu 45°C.',
+            goal: 'Menyingkirkan residu kotoran dan mencairkan fraksi stearin sawit yang membeku.',
+            param: 'Suhu 40°C - 50°C, filtrasi mesh 200',
+            time: '20 Menit',
+            tool: 'Panci Stainless Steel & Termometer Infrared',
+            k3: 'Penyediaan kain lap bersih & APD laboratorium',
+            science: 'Pemanasan ringan memastikan distribusi asam palmitat padat dan asam oleat cair tercampur seragam sebelum bereaksi dengan alkali.'
+          },
+          {
+            num: 2,
+            name: 'Pelarutan Alkali (Lye Solution)',
+            shortDesc: 'Pelarutan butiran kristal NaOH ke dalam air murni.',
+            goal: 'Membuat larutan basa kuat penghidrolisis dengan stoikiometri molar presisi.',
+            param: 'Eksotermik (suhu naik hingga 75°C, didinginkan ke 45°C)',
+            time: '15 Menit',
+            tool: 'Gelas Kimia Borosilikat & Spatula Pengaduk',
+            k3: 'WAJIB: Kacamata goggle, masker uap, & sarung tangan nitril tebal',
+            science: 'Disolusi kristal NaOH dalam air adalah reaksi eksotermik kuat yang melepaskan energi entalpi pelarutan (~44.5 kJ/mol).'
+          },
+          {
+            num: 3,
+            name: 'Emulsi & Pengadukan Trace',
+            shortDesc: 'Pencampuran lindi ke minyak hingga tekstur mengental.',
+            goal: 'Mencapai titik emulsi homogen di mana reaksi saponifikasi mulai berlangsung stabil.',
+            param: 'Kecepatan blender 800 RPM, suhu 40°C - 45°C',
+            time: '8 - 15 Menit',
+            tool: 'Immersion Hand-Blender Stainless',
+            k3: 'Wadah blender tinggi agar tidak ada percikan basa',
+            science: 'Kondisi "Trace" menandakan surfaktan sabun awal telah terbentuk dan bertindak sebagai zat pengemulsi alami antara fase minyak dan fase air.'
+          },
+          {
+            num: 4,
+            name: 'Pencetakan & Gel Phase',
+            shortDesc: 'Penuangan adonan ke cetakan silikon & insulasi hangat.',
+            goal: 'Memberi bentuk batangan dan membiarkan panas internal menyelesaikan saponifikasi.',
+            param: 'Insulasi selimut tebal 24 jam, suhu isolasi 50°C',
+            time: '24 - 48 Jam',
+            tool: 'Cetakan Sabun Silikon Food-Grade & Kotak Kayu',
+            k3: 'Jangan menyentuh adonan mentah dengan tangan kosong',
+            science: 'Fase gel (Gel Phase) terjadi saat panas reaksi tertahan, membuat sabun tampak agak transparan dan memastikan 98% molekul asam lemak terkonversi menjadi sabun.'
+          },
+          {
+            num: 5,
+            name: 'Pemotongan & Curing 4 Minggu',
+            shortDesc: 'Pemotongan batangan & pengangin-anginan di rak berongga.',
+            goal: 'Menuntaskan reaksi alkali sisa, menurunkan pH ke rentang ramah kulit, dan mengeraskan sabun.',
+            param: 'Suhu ruang 25°C, kelembaban 50%, pH akhir 8.5 - 9.5',
+            time: '3 - 4 Minggu',
+            tool: 'Pemotong Kawat Stainless & Rak Kayu Curing',
+            k3: 'Uji pH akhir menggunakan kertas lakmus atau pH strip digital',
+            science: 'Selama 4 minggu, kelebihan air menguap dan sisa mikroskopis NaOH bereaksi dengan CO₂ atmosfer (karbonasi) sehingga sabun menjadi lembut dan netral bagi kulit.'
+          }
+        ]
+      }
+    };
+
+    /**
+     * DATABASE DOKUMEN LKPD
+     */
+    const LKPD_DOCUMENTS = {
+      'singkong-pati': {
+        code: 'LKPD-01',
+        title: 'Ekstraksi Pati Singkong & Sintesis Bioplastik Ramah Lingkungan',
+        time: '60 Menit',
+        level: 'SMA / SMK Kelas X - XII',
+        goals: [
+          'Memisahkan pati singkong (amilosa dan amilopektin) dari serat selulosa melalui dekantasi gravitasi.',
+          'Mengamati pengaruh konsentrasi gliserol (plasticizer) terhadap elastisitas lembaran bioplastik.',
+          'Menghitung persentase rendemen pati basah dan pati kering dari singkong utuh.'
+        ],
+        tools: [
+          '1 buah Singkong segar (± 250 gram)',
+          'Parutan dapur / Blender makanan',
+          'Kain kasa atau serbet bersih untuk memeras',
+          'Mangkuk bening / Gelas kimia 500 mL',
+          'Air bersih 300 mL',
+          'Timbangan dapur digital (presisi 1 gram)',
+          'Asam cuka makan 25% (CH₃COOH) - 1 sendok teh',
+          'Gliserol murni / Minyak nabati - 1 sendok teh',
+          'Panci anti-lengket kecil & spatula silikon',
+          'Aluminium foil atau teflon datar untuk cetakan'
+        ],
+        steps: [
+          '<strong>Tahap 1 - Preparasi & Parut:</strong> Timbang singkong utuh (W₁). Kupas kulit luar dan kulit ari singkong, cuci bersih di air mengalir, lalu timbang kembali singkong kupas bersih (W₂). Parut atau blender singkong bersama 200 mL air hingga menjadi bubur halus.',
+          '<strong>Tahap 2 - Pemerasan & Dekantasi:</strong> Tuang bubur singkong ke atas kain kasa, peras kuat-kuat ke dalam mangkuk bening. Tambahkan 100 mL air ke ampas singkong, peras kembali untuk memaksimalkan ekstraksi pati. Diamkan air perasan selama 45-60 menit hingga terbentuk endapan putih padat di dasar mangkuk.',
+          '<strong>Tahap 3 - Isolasi Pati:</strong> Buang cairan bening bagian atas (dekantasi) secara perlahan hingga tersisa endapan pati putih basah murni. Timbang berat pati basah yang diperoleh (W₃).',
+          '<strong>Tahap 4 - Sintesis Bioplastik:</strong> Ambil 2 sendok makan (± 25 gram) pati basah, masukkan ke panci kecil. Tambahkan 100 mL air, 1 sendok teh cuka makan, dan 1 sendok teh gliserol. Aduk merata sebelum dipanaskan.',
+          '<strong>Tahap 5 - Gelatinisasi:</strong> Panaskan campuran di atas api kecil sambil diaduk terus-menerus selama 3-5 menit hingga adonan berubah transparan dan kental seperti lem gel. Tuang adonan panas ke atas lembaran aluminium foil, ratakan setipis mungkin (1 mm), lalu biarkan mengering pada suhu ruang selama 24 jam.'
+        ],
+        observations: [
+          { item: 'Berat Singkong Utuh (W₁)', unit: 'gram', sample: '250 g' },
+          { item: 'Berat Singkong Kupas Bersih (W₂)', unit: 'gram', sample: '190 g' },
+          { item: 'Berat Endapan Pati Basah (W₃)', unit: 'gram', sample: '65 g' },
+          { item: 'Persentase Rendemen Pati [ (W₃ / W₁) × 100% ]', unit: '%', sample: '26.0%' },
+          { item: 'Tekstur Lembaran Bioplastik setelah 24 Jam', unit: 'Deskripsi', sample: 'Lentur, agak elastis, tembus cahaya' }
+        ],
+        questions: [
+          'Mengapa endapan pati dapat terpisah dari air hanya dengan mendiamkannya (metode dekantasi gravitasi)? Hubungkan dengan berat jenis pati dan air!',
+          'Apa fungsi penambahan gliserol dan asam cuka dalam proses pembuatan lembaran bioplastik? Apa yang terjadi jika bioplastik dibuat tanpa gliserol?',
+          'Berdasarkan pengamatanmu, mengapa kemasan bioplastik berbahan dasar pati singkong lebih ramah lingkungan dibandingkan plastik polietilen sintetis dari minyak bumi?'
+        ]
+      },
+
+      'sawit-sabun': {
+        code: 'LKPD-02',
+        title: 'Pembuatan Sabun Mandi Alami dari Minyak Kelapa Sawit (Metode Saponifikasi Dingin)',
+        time: '45 Menit Praktik + 4 Minggu Curing',
+        level: 'SMA / SMK Kelas XI - XII Kimia & Agribisnis',
+        goals: [
+          'Membuktikan terjadinya reaksi saponifikasi hidrolisis trigliserida sawit oleh natrium hidroksida (NaOH).',
+          'Menerapkan stoikiometri angka penyabunan (SAP value) dan teknik superfatting 5%.',
+          'Menerapkan standar keselamatan kerja (K3/HSE) dalam menangani larutan basa kuat eksotermik.'
+        ],
+        tools: [
+          'Minyak kelapa sawit murni (bisa minyak goreng sawit baru atau CPO) - 200 gram',
+          'Natrium Hidroksida (NaOH) kristal teknis / food grade - 27 gram',
+          'Air suling / Aquades murni - 60 mL',
+          'Gelas kimia kaca tebal tahan panas (Pyrex/Borosilikat) 250 mL',
+          'Wadah mangkuk stainless steel / plastik tebal PP 500 mL',
+          'Timbangan digital akurasi 0.1 gram',
+          'Spatula pengaduk plastik atau sendok stainless',
+          'Immersion hand-blender mini (opsional namun sangat dianjurkan)',
+          'Cetakan silikon sabun atau bekas wadah susu tetra-pack',
+          'Perlengkapan APD: Kacamata goggle lab, sarung tangan nitril/karet, masker, baju lab/celemek'
+        ],
+        steps: [
+          '<strong>K3 PERINGATAN KERAS:</strong> Larutan NaOH bersifat kaustik kuat dan dapat membakar kulit. Selalu gunakan kacamata dan sarung tangan. Lakukan di ruangan berventilasi baik!',
+          '<strong>Tahap 1 - Pembuatan Larutan Lindi (Lye):</strong> Timbang tepat 60 gram air aquades dingin dalam gelas kaca. Timbang 27 gram butiran NaOH. Tuang kristal NaOH KE DALAM AIR perlahan sambil diaduk lembut. (JANGAN PERNAH menuang air ke dalam NaOH!). Amati kenaikan suhu drastis (reaksi eksotermik). Diamkan hingga suhu larutan lye turun ke ± 40°C.',
+          '<strong>Tahap 2 - Penyiapan Minyak Sawit:</strong> Timbang 200 gram minyak kelapa sawit ke dalam wadah utama. Hangatkan sebentar bila perlu hingga suhu minyak menyamai suhu larutan lye (± 40°C).',
+          '<strong>Tahap 3 - Pencampuran & Reaksi:</strong> Tuang larutan lye secara perlahan ke dalam minyak sawit sambil diaduk searah dengan spatula. Gunakan hand blender dengan pola putaran berseling (15 detik menyala, 10 detik diaduk manual).',
+          '<strong>Tahap 4 - Mencapai Trace:</strong> Amati perubahan warna adonan dari bening keemasan menjadi keruh kental menyerupai adonan puding encer. Saat tetesan spatula meninggalkan jejak garis di permukaan (titik "Trace"), adonan siap dicetak.',
+          '<strong>Tahap 5 - Pencetakan & Curing:</strong> Tuang adonan ke dalam cetakan silikon. Tutup cetakan dengan kardus dan bungkus handuk tebal selama 24-48 jam untuk menjaga fase gel. Setelah 48 jam, keluarkan sabun padat dari cetakan, potong rapi, dan letakkan di rak berventilasi sejuk selama 4 minggu untuk masa pematangan (curing).'
+        ],
+        observations: [
+          { item: 'Suhu Larutan Lye saat NaOH Dilarutkan', unit: '°C', sample: '72°C (Eksotermik kuat)' },
+          { item: 'Waktu Pengadukan hingga Mencapai Trace', unit: 'Menit', sample: '8 Menit (dengan blender)' },
+          { item: 'Tekstur Sabun setelah 24 Jam di Cetakan', unit: 'Deskripsi', sample: 'Padat lembut, hangat' },
+          { item: 'Kekerasan Sabun setelah 4 Minggu Curing', unit: 'Deskripsi', sample: 'Keras padat, berbusa melimpah' },
+          { item: 'Uji pH Sabun setelah 4 Minggu Curing', unit: 'Skala pH', sample: 'pH 9.0 (Aman untuk kulit)' }
+        ],
+        questions: [
+          'Tuliskan persamaan reaksi umum saponifikasi antara trigliserida sawit (tripalmitin) dengan natrium hidroksida!',
+          'Mengapa dalam formulasi sabun digunakan teknik Superfatting 5% (kelebihan minyak yang tidak tersabunkan)? Apa manfaatnya bagi kulit?',
+          'Mengapa sabun yang dibuat dengan metode saponifikasi dingin harus didiamkan selama 3 hingga 4 minggu (curing) sebelum aman digunakan untuk mandi?'
+        ]
+      },
+
+      'ikan-osmosis': {
+        code: 'LKPD-03',
+        title: 'Pengaruh Konsentrasi Garam (Osmosis) & Gelatinisasi Kerupuk Ikan',
+        time: '90 Menit',
+        level: 'SMA / SMK Kelas X - XI Biologi & Pengolahan Hasil Laut',
+        goals: [
+          'Menyelidiki fenomena perpindahan molekul air (osmosis) pada daging ikan segar pada variasi konsentrasi garam.',
+          'Mempelajari gelatinisasi ikatan amilopektin tapioka dengan protein ikan saat proses perebusan/pengukusan.',
+          'Menganalisis daya renyah dan faktor pengembangan kerupuk ikan mentah vs kerupuk goreng.'
+        ],
+        tools: [
+          'Daging fillet ikan lele/nila/tenggiri segar - 150 gram',
+          'Tepung tapioka berkualitas - 150 gram',
+          'Garam dapur (NaCl)',
+          'Air es dingin & Air matang',
+          'Timbangan analitik atau digital ketelitian 0.1 gram',
+          '3 buah wadah mangkuk plastik kecil berkode (A, B, C)',
+          'Kukusan kompor dapur & minyak goreng',
+          'Wajan penggorengan & peniris minyak'
+        ],
+        steps: [
+          '<strong>Tahap 1 - Uji Osmosis Daging Ikan:</strong> Siapkan 3 potongan fillet ikan dengan berat persis 20 gram per potong. Masukkan potongan 1 ke wadah A (air murni tanpa garam), potongan 2 ke wadah B (larutan garam 3%), dan potongan 3 ke wadah C (larutan garam 10%). Rendam selama 30 menit. Timbang kembali berat masing-masing potongan ikan setelah dikeringkan tisu.',
+          '<strong>Tahap 2 - Pembuatan Adonan Kerupuk Ikan:</strong> Haluskan 100 gram daging ikan bersama 2 siung bawang putih dan 3 gram garam. Tambahkan 100 gram tepung tapioka dan 40 mL air es sedikit demi sedikit hingga adonan kalis kenyal dapat dipulung menjadi bentuk silinder silindris (diameter 3 cm).',
+          '<strong>Tahap 3 - Pengukusan (Gelatinisasi):</strong> Kukus silinder adonan selama 35 menit di atas air mendidih (100°C). Biarkan dingin, lalu simpan dalam kulkas selama 6 jam agar struktur mengeras dan mudah diiris.',
+          '<strong>Tahap 4 - Pengirisan & Pengeringan:</strong> Iris adonan beku setipis 1 mm. Jemur di bawah sinar matahari atau masukkan ke dalam oven suhu 50°C selama 4 jam hingga kerupuk mentah berbunyi "klik" saat dipatahkan (kadar air < 8%).',
+          '<strong>Tahap 5 - Uji Goreng & Daya Kembang:</strong> Goreng kerupuk mentah dalam minyak panas (170°C). Ukur luas permukaan kerupuk sebelum dan sesudah digoreng.'
+        ],
+        observations: [
+          { item: 'Berat Ikan Wadah A (Air Murni 0%)', unit: 'gram', sample: '21.4 g (+1.4 g air masuk)' },
+          { item: 'Berat Ikan Wadah B (Garam Isotonis 3%)', unit: 'gram', sample: '19.8 g (Relatif stabil)' },
+          { item: 'Berat Ikan Wadah C (Garam Hipertonis 10%)', unit: 'gram', sample: '17.2 g (-2.8 g air ditarik keluar)' },
+          { item: 'Diameter Kerupuk Mentah', unit: 'cm', sample: '3.0 cm' },
+          { item: 'Diameter Kerupuk Setelah Digoreng', unit: 'cm', sample: '6.2 cm (Pengembangan >200%)' }
+        ],
+        questions: [
+          'Berdasarkan data berat pada Tahap 1, jelaskan arah perpindahan molekul air pada Wadah A dan Wadah C sesuai dengan prinsip osmosis membran sel!',
+          'Mengapa pembuatan adonan kerupuk ikan harus menggunakan air es bersuhu dingin saat pengadukan daging?',
+          'Faktor fisika-kimia apa yang menyebabkan keping kerupuk mentah dapat mekar mengembang dua kali lipat saat dicelupkan ke dalam minyak goreng bersuhu 170°C?'
+        ]
+      }
+    };
+
+    /**
+     * STATE MANAGEMENT APLIKASI
+     */
+    let currentCommodity = 'ikan';
+    let currentWorkflow = 'singkong-mocaf';
+    let currentWorkflowStepIdx = 0;
+    let currentLkpdKey = 'singkong-pati';
+
+    /**
+     * INISIALISASI SAAT HALAMAN SELESAI DIMUAT
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+      // Setup mobile menu
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const hamburgerIcon = document.getElementById('hamburger-icon');
+      const closeIcon = document.getElementById('close-icon');
+
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+          hamburgerIcon.classList.toggle('hidden');
+          closeIcon.classList.toggle('hidden');
+        });
+
+        // Close menu when clicking link
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            hamburgerIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+          });
+        });
+      }
+
+      // Inisialisasi Tampilan
+      switchCommodity('ikan');
+      changeWorkflow('singkong-mocaf');
+      calculateSTEM();
+    });
+
+    /**
+     * SWITCH TABS KOMODITAS
+     */
+    function switchCommodity(commKey) {
+      currentCommodity = commKey;
+      const data = COMMODITY_DATA[commKey];
+      if (!data) return;
+
+      // Update Tab Buttons UI
+      const tabs = ['ikan', 'singkong', 'sawit'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`tab-btn-${t}`);
+        if (btn) {
+          if (t === commKey) {
+            btn.className = 'tab-button flex items-center gap-2.5 px-6 py-3 rounded-xl font-bold text-sm transition-all text-white bg-emerald-600 shadow-sm';
+          } else {
+            btn.className = 'tab-button flex items-center gap-2.5 px-6 py-3 rounded-xl font-bold text-sm transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-200/50';
+          }
+        }
+      });
+
+      // Update Hero Card Komoditas
+      document.getElementById('comm-title').innerText = data.title;
+      document.getElementById('comm-desc').innerText = data.desc;
+      document.getElementById('comm-tag1').innerText = data.tags[0] || '';
+      document.getElementById('comm-tag2').innerText = data.tags[1] || '';
+      document.getElementById('comm-tag3').innerText = data.tags[2] || '';
+
+      // Update STEM Cards Content
+      document.getElementById('stem-sci-title').innerText = data.science.title;
+      document.getElementById('stem-sci-desc').innerHTML = data.science.points.map(p => `<p>${p}</p>`).join('');
+
+      document.getElementById('stem-tech-title').innerText = data.technology.title;
+      document.getElementById('stem-tech-desc').innerHTML = data.technology.points.map(p => `<p>${p}</p>`).join('');
+
+      document.getElementById('stem-eng-title').innerText = data.engineering.title;
+      document.getElementById('stem-eng-desc').innerHTML = data.engineering.points.map(p => `<p>${p}</p>`).join('');
+
+      document.getElementById('stem-math-title').innerText = data.mathematics.title;
+      document.getElementById('stem-math-desc').innerHTML = data.mathematics.points.map(p => `<p>${p}</p>`).join('');
+    }
+
+    /**
+     * BUKA MODAL DETAIL PILAR STEM
+     */
+    function openDetailModal(pillarKey) {
+      const comm = COMMODITY_DATA[currentCommodity];
+      if (!comm || !comm[pillarKey]) return;
+
+      const pilar = comm[pillarKey];
+      const modal = document.getElementById('modal-stem');
+      
+      const badgeElem = document.getElementById('modal-stem-badge');
+      const titleElem = document.getElementById('modal-stem-title');
+      const bodyElem = document.getElementById('modal-stem-body');
+      const iconWrap = document.getElementById('modal-stem-icon-wrap');
+
+      badgeElem.innerText = `${pilar.badge} • ${comm.title.split(' ')[1] || 'Pangan'}`;
+      titleElem.innerText = pilar.title;
+
+      let iconLetter = 'S';
+      if (pillarKey === 'technology') iconLetter = 'T';
+      if (pillarKey === 'engineering') iconLetter = 'E';
+      if (pillarKey === 'mathematics') iconLetter = 'M';
+      iconWrap.innerText = iconLetter;
+
+      bodyElem.innerHTML = `
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <h4 class="font-bold text-slate-900 text-sm mb-2">Poin-Poin Kunci Pembelajaran:</h4>
+          <ul class="space-y-2 list-disc list-inside text-xs sm:text-sm text-slate-700">
+            ${pilar.points.map(p => `<li>${p}</li>`).join('')}
+          </ul>
+        </div>
+        <div class="bg-emerald-50/70 p-4 rounded-2xl border border-emerald-200 text-xs sm:text-sm text-emerald-950">
+          <h4 class="font-bold mb-1">🔬 Pembahasan Mendalam (Deep-Dive Analisis):</h4>
+          <p class="leading-relaxed">${pilar.deepDive}</p>
+        </div>
+      `;
+
+      modal.classList.remove('hidden');
+    }
+
+    /**
+     * WORKFLOW FUNCTIONS
+     */
+    function changeWorkflow(wfKey) {
+      currentWorkflow = wfKey;
+      const wf = WORKFLOW_DATA[wfKey];
+      if (!wf) return;
+
+      document.getElementById('wf-active-title').innerText = wf.title;
+      document.getElementById('wf-active-subtitle').innerText = wf.subtitle;
+
+      const grid = document.getElementById('workflow-steps-grid');
+      grid.innerHTML = '';
+
+      wf.steps.forEach((step, idx) => {
+        const stepCard = document.createElement('div');
+        stepCard.className = 'bg-slate-50 hover:bg-teal-50/50 border border-slate-200 hover:border-teal-400 rounded-2xl p-4 cursor-pointer transition-all hover:shadow-md flex flex-col justify-between group';
+        stepCard.onclick = () => openWorkflowStepModal(idx);
+
+        stepCard.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="w-7 h-7 rounded-lg bg-teal-600 text-white font-extrabold text-xs flex items-center justify-center shadow-sm">
+                ${step.num}
+              </span>
+              <span class="text-[10px] font-semibold text-slate-400 group-hover:text-teal-600 transition-colors">
+                Klik Rincian ➔
+              </span>
+            </div>
+            <h5 class="text-sm font-bold text-slate-900 leading-snug group-hover:text-teal-700 transition-colors">
+              ${step.name}
+            </h5>
+            <p class="text-xs text-slate-500 mt-1.5 line-clamp-3">
+              ${step.shortDesc}
+            </p>
+          </div>
+          <div class="mt-4 pt-2.5 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-400">
+            <span>⏱️ ${step.time}</span>
+          </div>
+        `;
+
+        grid.appendChild(stepCard);
+      });
+    }
+
+    function openWorkflowStepModal(stepIdx) {
+      const wf = WORKFLOW_DATA[currentWorkflow];
+      if (!wf || !wf.steps[stepIdx]) return;
+
+      currentWorkflowStepIdx = stepIdx;
+      const step = wf.steps[stepIdx];
+
+      document.getElementById('wf-modal-step-number').innerText = step.num;
+      document.getElementById('wf-modal-title').innerText = step.name;
+      document.getElementById('wf-modal-goal').innerHTML = `<strong>Tujuan:</strong> ${step.goal}`;
+      document.getElementById('wf-modal-param').innerText = step.param;
+      document.getElementById('wf-modal-time').innerText = step.time;
+      document.getElementById('wf-modal-tool').innerText = step.tool;
+      document.getElementById('wf-modal-k3').innerText = step.k3;
+      document.getElementById('wf-modal-science-note').innerHTML = step.science;
+
+      // Update prev/next button states
+      const prevBtn = document.getElementById('wf-prev-btn');
+      const nextBtn = document.getElementById('wf-next-btn');
+
+      prevBtn.disabled = (stepIdx === 0);
+      prevBtn.classList.toggle('opacity-50', stepIdx === 0);
+      prevBtn.classList.toggle('cursor-not-allowed', stepIdx === 0);
+
+      nextBtn.disabled = (stepIdx === wf.steps.length - 1);
+      nextBtn.classList.toggle('opacity-50', stepIdx === wf.steps.length - 1);
+      nextBtn.classList.toggle('cursor-not-allowed', stepIdx === wf.steps.length - 1);
+
+      document.getElementById('modal-workflow-step').classList.remove('hidden');
+    }
+
+    function navigateWorkflowStep(offset) {
+      const wf = WORKFLOW_DATA[currentWorkflow];
+      if (!wf) return;
+      const nextIdx = currentWorkflowStepIdx + offset;
+      if (nextIdx >= 0 && nextIdx < wf.steps.length) {
+        openWorkflowStepModal(nextIdx);
+      }
+    }
+
+    /**
+     * KALKULATOR STEM (NERACA MASSA & TEKNO-EKONOMI)
+     */
+    const COMMODITY_CALC_PRESETS = {
+      'singkong-mocaf': {
+        name: 'Tepung MOCAF',
+        unit: 'kg tepung',
+        defaultRendemen: 28,
+        defaultPrice: 3000,
+        defaultOverhead: 75000,
+        priceHint: 'Estimasi harga pasar singkong mentah: Rp 2.500 - 3.500/kg'
+      },
+      'ikan-fillet': {
+        name: 'Fillet Ikan Segar',
+        unit: 'kg fillet',
+        defaultRendemen: 40,
+        defaultPrice: 28000,
+        defaultOverhead: 120000,
+        priceHint: 'Estimasi harga ikan basah utuh (lele/nila/patin): Rp 24.000 - 32.000/kg'
+      },
+      'ikan-kerupuk': {
+        name: 'Kerupuk Ikan Renyah',
+        unit: 'kg kerupuk',
+        defaultRendemen: 75,
+        defaultPrice: 28000,
+        defaultOverhead: 160000,
+        priceHint: 'Rendemen tinggi karena penambahan matriks tapioka dan bumbu.'
+      },
+      'sawit-sabun': {
+        name: 'Sabun Batang Alami',
+        unit: 'batang sabun (@100g)',
+        defaultRendemen: 120, // 1 kg minyak + lye -> ~12 batang sabun
+        defaultPrice: 16000,
+        defaultOverhead: 65000,
+        priceHint: 'Estimasi harga minyak sawit/CPO: Rp 14.000 - 18.000/kg'
+      }
+    };
+
+    function onCommodityChange(key) {
+      const preset = COMMODITY_CALC_PRESETS[key];
+      if (!preset) return;
+
+      document.getElementById('calc-rendemen-input').value = preset.defaultRendemen;
+      document.getElementById('calc-raw-price').value = preset.defaultPrice;
+      document.getElementById('calc-overhead').value = preset.defaultOverhead;
+      document.getElementById('calc-price-hint').innerText = preset.priceHint;
+
+      calculateSTEM();
+    }
+
+    function syncWeightSlider(val) {
+      document.getElementById('calc-raw-weight').value = val;
+      document.getElementById('label-raw-weight').innerText = `${val} kg`;
+      calculateSTEM();
+    }
+
+    function syncWeightInput(val) {
+      const num = Math.max(1, Number(val) || 1);
+      document.getElementById('calc-slider-weight').value = Math.min(500, num);
+      document.getElementById('label-raw-weight').innerText = `${num} kg`;
+      calculateSTEM();
+    }
+
+    function applyPreset(weight, price, overhead) {
+      document.getElementById('calc-slider-weight').value = weight;
+      document.getElementById('calc-raw-weight').value = weight;
+      document.getElementById('label-raw-weight').innerText = `${weight} kg`;
+      document.getElementById('calc-raw-price').value = price;
+      document.getElementById('calc-overhead').value = overhead;
+      calculateSTEM();
+      showToast('⚡ Preset Berhasil Diterapkan!');
+    }
+
+    function resetCalculator() {
+      const commKey = document.getElementById('calc-commodity').value;
+      onCommodityChange(commKey);
+      syncWeightSlider(50);
+      document.getElementById('calc-margin-input').value = 30;
+      showToast('🔄 Kalkulator Direset ke Default');
+    }
+
+    function formatRupiah(number) {
+      return new Intl.NumberFormat('id-ID', { maximumFractionDigits: 0 }).format(number);
+    }
+
+    function calculateSTEM() {
+      const commKey = document.getElementById('calc-commodity').value;
+      const preset = COMMODITY_CALC_PRESETS[commKey] || COMMODITY_CALC_PRESETS['singkong-mocaf'];
+
+      const rawWeight = Math.max(1, parseFloat(document.getElementById('calc-raw-weight').value) || 50);
+      const rawPrice = Math.max(0, parseFloat(document.getElementById('calc-raw-price').value) || 0);
+      const overhead = Math.max(0, parseFloat(document.getElementById('calc-overhead').value) || 0);
+      const rendemen = Math.max(0.1, parseFloat(document.getElementById('calc-rendemen-input').value) || 28);
+      const targetMargin = Math.max(0, parseFloat(document.getElementById('calc-margin-input').value) || 30);
+
+      // 1. Neraca Massa (Output Jadi)
+      let yieldQty = (rawWeight * rendemen) / 100;
+      let unitLabel = preset.unit;
+
+      if (commKey === 'sawit-sabun') {
+        // Konversi ke satuan batang 100g
+        const totalGrams = (rawWeight * (rendemen / 100)) * 1000;
+        const totalBars = Math.floor(totalGrams / 100);
+        yieldQty = totalBars;
+        unitLabel = 'batang sabun';
+      }
+
+      // 2. Neraca Biaya
+      const rawMaterialCost = rawWeight * rawPrice;
+      const totalCost = rawMaterialCost + overhead;
+
+      // 3. HPP Satuan
+      const hppPerUnit = yieldQty > 0 ? (totalCost / yieldQty) : 0;
+
+      // 4. Rekomendasi Jual & Laba
+      const sellingPrice = hppPerUnit * (1 + (targetMargin / 100));
+      const totalRevenue = yieldQty * sellingPrice;
+      const netProfit = totalRevenue - totalCost;
+      const actualMargin = totalRevenue > 0 ? ((netProfit / totalRevenue) * 100) : 0;
+
+      // Update Tampilan DOM
+      document.getElementById('output-product-badge').innerText = preset.name;
+      document.getElementById('res-yield-qty').innerText = (commKey === 'sawit-sabun') ? yieldQty : yieldQty.toFixed(1);
+      document.getElementById('res-yield-unit').innerText = unitLabel;
+      document.getElementById('res-total-cost').innerText = formatRupiah(totalCost);
+
+      const hppUnitText = (commKey === 'sawit-sabun') ? '/batang' : '/kg';
+      document.getElementById('res-hpp').innerText = `Rp ${formatRupiah(hppPerUnit)}${hppUnitText}`;
+      document.getElementById('res-selling-price').innerText = `Rp ${formatRupiah(sellingPrice)}${hppUnitText}`;
+      document.getElementById('res-net-profit').innerText = `+Rp ${formatRupiah(netProfit)}`;
+      document.getElementById('res-roi').innerText = `Margin: ${actualMargin.toFixed(1)}%`;
+
+      // Update Step-by-Step Formula Breakdown
+      document.getElementById('formula-yield').innerText = `${rawWeight} kg × ${rendemen}% = ${yieldQty.toFixed(1)} ${unitLabel}`;
+      document.getElementById('formula-cost').innerText = `(${rawWeight} × Rp ${formatRupiah(rawPrice)}) + Rp ${formatRupiah(overhead)} = Rp ${formatRupiah(totalCost)}`;
+      document.getElementById('formula-hpp').innerText = `Rp ${formatRupiah(totalCost)} / ${yieldQty.toFixed(1)} ${unitLabel} = Rp ${formatRupiah(hppPerUnit)}${hppUnitText}`;
+      document.getElementById('formula-sell').innerText = `Rp ${formatRupiah(hppPerUnit)} × (1 + ${targetMargin}%) = Rp ${formatRupiah(sellingPrice)}${hppUnitText}`;
+    }
+
+    /**
+     * LEMBAR KERJA PESERTA DIDIK (LKPD) FUNCTIONS
+     */
+    function openLkpdModal(lkpdKey) {
+      currentLkpdKey = lkpdKey;
+      const doc = LKPD_DOCUMENTS[lkpdKey];
+      if (!doc) return;
+
+      const printArea = document.getElementById('print-area');
+      
+      printArea.innerHTML = `
+        <div class="border-b-2 border-slate-900 pb-3 mb-6">
+          <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
+            <span>Lembar Kerja Praktikum</span>
+            <span class="font-bold text-slate-800">${doc.code}</span>
+          </div>
+          <h2 class="text-2xl font-black text-slate-900 leading-tight">${doc.title}</h2>
+          <div class="flex items-center gap-4 text-xs text-slate-600 mt-2">
+            <span>Alokasi Waktu: ${doc.time}</span>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          
+          <!-- Tujuan -->
+          <div>
+            <h4 class="text-sm font-extrabold text-slate-900 uppercase tracking-wide mb-2 flex items-center gap-2">
+              <span class="w-5 h-5 rounded bg-emerald-600 text-white flex items-center justify-center text-xs">A</span>
+              Tujuan Pembelajaran STEM
+            </h4>
+            <ul class="list-disc list-inside text-xs sm:text-sm text-slate-700 space-y-1.5 pl-2">
+              ${doc.goals.map(g => `<li>${g}</li>`).join('')}
+            </ul>
+          </div>
+
+          <!-- Alat & Bahan -->
+          <div>
+            <h4 class="text-sm font-extrabold text-slate-900 uppercase tracking-wide mb-2 flex items-center gap-2">
+              <span class="w-5 h-5 rounded bg-teal-600 text-white flex items-center justify-center text-xs">B</span>
+              Alat dan Bahan
+            </h4>
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700">
+                ${doc.tools.map(t => `<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>${t}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+
+          <!-- Langkah Kerja -->
+          <div>
+            <h4 class="text-sm font-extrabold text-slate-900 uppercase tracking-wide mb-2 flex items-center gap-2">
+              <span class="w-5 h-5 rounded bg-indigo-600 text-white flex items-center justify-center text-xs">C</span>
+              Langkah Kerja Eksperimen
+            </h4>
+            <div class="space-y-2 text-xs sm:text-sm text-slate-700">
+              ${doc.steps.map((st, i) => `
+                <div class="p-3 rounded-xl bg-white border border-slate-200">
+                  <div class="leading-relaxed">${st}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Tabel Pengamatan -->
+          <div>
+            <h4 class="text-sm font-extrabold text-slate-900 uppercase tracking-wide mb-2 flex items-center gap-2">
+              <span class="w-5 h-5 rounded bg-amber-600 text-white flex items-center justify-center text-xs">D</span>
+              Tabel Hasil Pengamatan Siswa
+            </h4>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs border border-slate-300 rounded-xl overflow-hidden">
+                <thead class="bg-slate-100 text-slate-800 font-bold border-b border-slate-300">
+                  <tr>
+                    <th class="p-2.5">No</th>
+                    <th class="p-2.5">Parameter Pengamatan</th>
+                    <th class="p-2.5">Satuan</th>
+                    <th class="p-2.5">Data Pengamatan Mandiri Siswa</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 bg-white">
+                  ${doc.observations.map((obs, idx) => `
+                    <tr>
+                      <td class="p-2.5 font-bold">${idx + 1}</td>
+                      <td class="p-2.5 font-medium text-slate-800">${obs.item}</td>
+                      <td class="p-2.5 text-slate-500">${obs.unit}</td>
+                      <td class="p-2.5 font-mono text-emerald-800 bg-emerald-50/40">${obs.sample}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Pertanyaan Analisis -->
+          <div>
+            <h4 class="text-sm font-extrabold text-slate-900 uppercase tracking-wide mb-2 flex items-center gap-2">
+              <span class="w-5 h-5 rounded bg-purple-600 text-white flex items-center justify-center text-xs">E</span>
+              Pertanyaan Analisis &amp; Diskusi STEM
+            </h4>
+            <ol class="list-decimal list-inside text-xs sm:text-sm text-slate-700 space-y-2 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+              ${doc.questions.map(q => `<li class="leading-relaxed pl-1">${q}</li>`).join('')}
+            </ol>
+          </div>
+
+        </div>
+      `;
+
+      document.getElementById('modal-lkpd').classList.remove('hidden');
+    }
+
+    function printLkpdDirect(lkpdKey) {
+      openLkpdModal(lkpdKey);
+      setTimeout(() => {
+        window.print();
+      }, 300);
+    }
+
+    function printCurrentLkpd() {
+      window.print();
+    }
+
+    function copyLkpdText() {
+      const doc = LKPD_DOCUMENTS[currentLkpdKey];
+      if (!doc) return;
+
+      const text = `
+=== ${doc.code}: ${doc.title} ===
+Jenjang: ${doc.level} | Alokasi Waktu: ${doc.time}
+
+[TUJUAN PEMBELAJARAN STEM]
+${doc.goals.map((g, i) => `${i + 1}. ${g}`).join('\n')}
+
+[ALAT DAN BAHAN]
+${doc.tools.map((t, i) => `- ${t}`).join('\n')}
+
+[LANGKAH KERJA]
+${doc.steps.map((s, i) => `Langkah ${i + 1}: ${s.replace(/<[^>]*>?/gm, '')}`).join('\n\n')}
+
+[PERTANYAAN DISKUSI]
+${doc.questions.map((q, i) => `${i + 1}. ${q}`).join('\n')}
+      `.trim();
+
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('📋 Teks LKPD Tersalin ke Clipboard!');
+      }).catch(() => {
+        showToast('Gagal menyalin teks.');
+      });
+    }
+
+    /**
+     * MODAL HELPERS & TOAST
+     */
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.add('hidden');
+      }
+    }
+
+    // Close on escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal('modal-stem');
+        closeModal('modal-workflow-step');
+        closeModal('modal-lkpd');
+      }
+    });
+
+    function showToast(message, icon = '✅') {
+      const toast = document.getElementById('toast');
+      const msgElem = document.getElementById('toast-msg');
+      const iconElem = document.getElementById('toast-icon');
+
+      if (!toast) return;
+
+      msgElem.innerText = message;
+      iconElem.innerText = icon;
+
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
